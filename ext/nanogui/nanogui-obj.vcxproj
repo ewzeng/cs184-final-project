@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{68332608-81B7-3014-A3E8-66DB1106C32C}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>nanogui-obj</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">nanogui-obj.dir\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">nanogui-obj.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">nanogui-obj</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">nanogui-obj.dir\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">nanogui-obj.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">nanogui-obj</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">nanogui-obj.dir\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">nanogui-obj.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">nanogui-obj</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">nanogui-obj.dir\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">nanogui-obj.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">nanogui-obj</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std=gnu++11</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;NANOGUI_BUILD;NVG_BUILD;GLAD_GLAPI_EXPORT;GLAD_GLAPI_EXPORT_BUILD;_GLFW_BUILD_DLL;NVG_SHARED;EIGEN_DONT_ALIGN;NANOGUI_SHARED;NANOGUI_GLAD;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;NANOGUI_BUILD;NVG_BUILD;GLAD_GLAPI_EXPORT;GLAD_GLAPI_EXPORT_BUILD;_GLFW_BUILD_DLL;NVG_SHARED;EIGEN_DONT_ALIGN;NANOGUI_SHARED;NANOGUI_GLAD;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std=gnu++11</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;NANOGUI_BUILD;NVG_BUILD;GLAD_GLAPI_EXPORT;GLAD_GLAPI_EXPORT_BUILD;_GLFW_BUILD_DLL;NVG_SHARED;EIGEN_DONT_ALIGN;NANOGUI_SHARED;NANOGUI_GLAD;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;NANOGUI_BUILD;NVG_BUILD;GLAD_GLAPI_EXPORT;GLAD_GLAPI_EXPORT_BUILD;_GLFW_BUILD_DLL;NVG_SHARED;EIGEN_DONT_ALIGN;NANOGUI_SHARED;NANOGUI_GLAD;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std=gnu++11</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;NANOGUI_BUILD;NVG_BUILD;GLAD_GLAPI_EXPORT;GLAD_GLAPI_EXPORT_BUILD;_GLFW_BUILD_DLL;NVG_SHARED;EIGEN_DONT_ALIGN;NANOGUI_SHARED;NANOGUI_GLAD;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;NANOGUI_BUILD;NVG_BUILD;GLAD_GLAPI_EXPORT;GLAD_GLAPI_EXPORT_BUILD;_GLFW_BUILD_DLL;NVG_SHARED;EIGEN_DONT_ALIGN;NANOGUI_SHARED;NANOGUI_GLAD;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std=gnu++11</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;NANOGUI_BUILD;NVG_BUILD;GLAD_GLAPI_EXPORT;GLAD_GLAPI_EXPORT_BUILD;_GLFW_BUILD_DLL;NVG_SHARED;EIGEN_DONT_ALIGN;NANOGUI_SHARED;NANOGUI_GLAD;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;NANOGUI_BUILD;NVG_BUILD;GLAD_GLAPI_EXPORT;GLAD_GLAPI_EXPORT_BUILD;_GLFW_BUILD_DLL;NVG_SHARED;EIGEN_DONT_ALIGN;NANOGUI_SHARED;NANOGUI_GLAD;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\eigen;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glfw\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\CMakeFiles\9e1b61934bc47d6acfe7378551c68af2\nanogui_resources.cpp.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Running bin2c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DOUTPUT_C=nanogui_resources.cpp -DOUTPUT_H=nanogui_resources.h -DINPUT_FILES=C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/Roboto-Bold.ttf,C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/Roboto-Regular.ttf,C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/entypo.ttf -P C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/bin2c.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\Roboto-Bold.ttf;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\Roboto-Regular.ttf;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\entypo.ttf;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\nanogui_resources.cpp;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\nanogui_resources.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Running bin2c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DOUTPUT_C=nanogui_resources.cpp -DOUTPUT_H=nanogui_resources.h -DINPUT_FILES=C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/Roboto-Bold.ttf,C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/Roboto-Regular.ttf,C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/entypo.ttf -P C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/bin2c.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\Roboto-Bold.ttf;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\Roboto-Regular.ttf;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\entypo.ttf;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\nanogui_resources.cpp;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\nanogui_resources.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Running bin2c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DOUTPUT_C=nanogui_resources.cpp -DOUTPUT_H=nanogui_resources.h -DINPUT_FILES=C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/Roboto-Bold.ttf,C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/Roboto-Regular.ttf,C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/entypo.ttf -P C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/bin2c.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\Roboto-Bold.ttf;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\Roboto-Regular.ttf;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\entypo.ttf;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\nanogui_resources.cpp;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\nanogui_resources.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Running bin2c</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DOUTPUT_C=nanogui_resources.cpp -DOUTPUT_H=nanogui_resources.h -DINPUT_FILES=C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/Roboto-Bold.ttf,C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/Roboto-Regular.ttf,C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/entypo.ttf -P C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/resources/bin2c.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\Roboto-Bold.ttf;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\Roboto-Regular.ttf;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\resources\entypo.ttf;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\nanogui_resources.cpp;C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\nanogui_resources.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project -BC:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project --check-stamp-file C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXSourceRuns.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project -BC:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project --check-stamp-file C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXSourceRuns.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project -BC:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project --check-stamp-file C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXSourceRuns.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project -BC:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project --check-stamp-file C:/Users/Zeng/Desktop/ezeng/2-classes/cs_184/projects/final_project/ext/nanogui/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCXXSourceRuns.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\nanovg\src\nanovg.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4005;4456;4457;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4005;4456;4457;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">4005;4456;4457;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">4005;4456;4457;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\src\glad.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4055;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4055;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">4055;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">4055;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include\glad\glad.h" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\ext\glad\include\KHR\khrplatform.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\nanogui_resources.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\glutil.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\glutil.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\common.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\common.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\widget.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\widget.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\theme.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\theme.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\layout.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\layout.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\screen.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\screen.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\label.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\label.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\window.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\window.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\popup.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\popup.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\checkbox.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\checkbox.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\button.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\button.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\popupbutton.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\popupbutton.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\combobox.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\combobox.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\progressbar.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\progressbar.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\slider.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\slider.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\messagedialog.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\messagedialog.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\textbox.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\textbox.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\imagepanel.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\imagepanel.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\imageview.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\imageview.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\vscrollpanel.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\vscrollpanel.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\colorwheel.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\colorwheel.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\colorpicker.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\colorpicker.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\graph.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\graph.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\stackedwidget.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\stackedwidget.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\tabheader.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\tabheader.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\tabwidget.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\tabwidget.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\glcanvas.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\glcanvas.cpp" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\formhelper.h" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\toolbutton.h" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\opengl.h" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\nanogui.h" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\serializer\core.h" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\serializer\opengl.h" />
+    <ClInclude Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\include\nanogui\serializer\sparse.h" />
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ext\nanogui\src\serializer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\ZERO_CHECK.vcxproj">
+      <Project>{9A782A4E-A07F-3BE1-80E2-DCFC34858C50}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

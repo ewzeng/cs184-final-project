@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\cloth.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\clothMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\collision\sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\collision\plane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\clothSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\misc\sphere_drawing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\misc\file_utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\misc\getopt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Zeng\Desktop\ezeng\2-classes\cs_184\projects\final_project\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{545B4713-95C9-370F-8A08-31B7010C9B7D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
