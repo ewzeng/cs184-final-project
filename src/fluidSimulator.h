@@ -1,27 +1,26 @@
-#ifndef CGL_CLOTH_SIMULATOR_H
-#define CGL_CLOTH_SIMULATOR_H
+#ifndef CGL_FLUID_SIMULATOR_H
+#define CGL_FLUID_SIMULATOR_H
 
 #include <nanogui/nanogui.h>
 #include <memory>
 
 #include "camera.h"
-#include "cloth.h"
+#include "fluid.h"
 #include "collision/collisionObject.h"
 
 using namespace nanogui;
 
 struct UserShader;
-enum ShaderTypeHint { WIREFRAME = 0, NORMALS = 1, PHONG = 2 };
 
-class ClothSimulator {
+class FluidSimulator {
 public:
-  ClothSimulator(std::string project_root, Screen *screen);
-  ~ClothSimulator();
+  FluidSimulator(std::string project_root, Screen *screen);
+  ~FluidSimulator();
 
   void init();
 
-  void loadCloth(Cloth *cloth);
-  void loadClothParameters(ClothParameters *cp);
+  void loadFluid(Fluid *fluid);
+  void loadFluidParameters(FluidParameters *fp);
   void loadCollisionObjects(vector<CollisionObject *> *objects);
   virtual bool isAlive();
   virtual void drawContents();
@@ -38,8 +37,6 @@ public:
 private:
   virtual void initGUI(Screen *screen);
   void drawWireframe(GLShader &shader);
-  void drawNormals(GLShader &shader);
-  void drawPhong(GLShader &shader);
   
   void load_shaders();
   void load_textures();
@@ -62,8 +59,8 @@ private:
   CGL::Vector3D gravity = CGL::Vector3D(0, -9.8, 0);
   nanogui::Color color = nanogui::Color(1.0f, 1.0f, 1.0f, 1.0f);
 
-  Cloth *cloth;
-  ClothParameters *cp;
+  Fluid *fluid;
+  FluidParameters *fp;
   vector<CollisionObject *> *collision_objects;
 
   // OpenGL attributes
@@ -137,16 +134,14 @@ private:
 };
 
 struct UserShader {
-  UserShader(std::string display_name, std::shared_ptr<GLShader> nanogui_shader, ShaderTypeHint type_hint)
+  UserShader(std::string display_name, std::shared_ptr<GLShader> nanogui_shader)
   : display_name(display_name)
-  , nanogui_shader(nanogui_shader)
-  , type_hint(type_hint) {
+  , nanogui_shader(nanogui_shader) {
   }
   
   std::shared_ptr<GLShader> nanogui_shader;
   std::string display_name;
-  ShaderTypeHint type_hint;
   
 };
 
-#endif // CGL_CLOTH_SIM_H
+#endif // CGL_FLUID_SIM_H
