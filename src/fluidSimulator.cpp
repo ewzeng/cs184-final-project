@@ -185,14 +185,18 @@ void FluidSimulator::drawContents() {
 
 void FluidSimulator::drawParticles(GLShader &shader) {
 
-    // HOW TO DRAW PARTICLES WITH A SHADER? drawArray + attributes???? yayeet lets try that
+    // Create a matrix storing the homogeneous coordinates of all the particles
+    MatrixXf positions(4, fluid->num_particles);
+    for (int i = 0; i < fluid->num_particles; i++) {
+        Vector3D p = fluid->particles[i].position;
+        positions.col(i) << p.x, p.y, p.z, 1.0;
+    }
 
-  //shader.setUniform("u_color", nanogui::Color(1.0f, 1.0f, 1.0f, 1.0f), false);
-  shader.uploadAttrib("in_position", positions, false);
-  // Commented out: the wireframe shader does not have this attribute
-  //shader.uploadAttrib("in_normal", normals);
+    // Upload positions to shader
+    shader.uploadAttrib("in_position", positions, false);
 
-  shader.drawArray(GL_LINES, 0, num_springs * 2);
+    // Draw vertices
+    shader.drawArray(GL_POINTS, 0, fluid->num_particles);
 }
 
 // ----------------------------------------------------------------------------
@@ -382,69 +386,6 @@ void FluidSimulator::initGUI(Screen *screen) {
   window->setPosition(Vector2i(default_window_size(0) - 245, 15));
   window->setLayout(new GroupLayout(15, 6, 14, 5));
 
-  // Spring types
-
-  new Label(window, "Spring types", "sans-bold");
-
-  {
-    Button *b = new Button(window, "structural");
-    b->setFlags(Button::ToggleButton);
-    b->setPushed(cp->enable_structural_constraints);
-    b->setFontSize(14);
-    b->setChangeCallback(
-        [this](bool state) { cp->enable_structural_constraints = state; });
-
-    b = new Button(window, "shearing");
-    b->setFlags(Button::ToggleButton);
-    b->setPushed(cp->enable_shearing_constraints);
-    b->setFontSize(14);
-    b->setChangeCallback(
-        [this](bool state) { cp->enable_shearing_constraints = state; });
-
-    b = new Button(window, "bending");
-    b->setFlags(Button::ToggleButton);
-    b->setPushed(cp->enable_bending_constraints);
-    b->setFontSize(14);
-    b->setChangeCallback(
-        [this](bool state) { cp->enable_bending_constraints = state; });
-  }
-
-  // Mass-spring parameters
-
-  new Label(window, "Parameters", "sans-bold");
-
-  {
-    Widget *panel = new Widget(window);
-    GridLayout *layout =
-        new GridLayout(Orientation::Horizontal, 2, Alignment::Middle, 5, 5);
-    layout->setColAlignment({Alignment::Maximum, Alignment::Fill});
-    layout->setSpacing(0, 10);
-    panel->setLayout(layout);
-
-    new Label(panel, "density :", "sans-bold");
-
-    FloatBox<double> *fb = new FloatBox<double>(panel);
-    fb->setEditable(true);
-    fb->setFixedSize(Vector2i(100, 20));
-    fb->setFontSize(14);
-    fb->setValue(cp->density / 10);
-    fb->setUnits("g/cm^2");
-    fb->setSpinnable(true);
-    fb->setCallback([this](float value) { cp->density = (double)(value * 10); });
-
-    new Label(panel, "ks :", "sans-bold");
-
-    fb = new FloatBox<double>(panel);
-    fb->setEditable(true);
-    fb->setFixedSize(Vector2i(100, 20));
-    fb->setFontSize(14);
-    fb->setValue(cp->ks);
-    fb->setUnits("N/m");
-    fb->setSpinnable(true);
-    fb->setMinValue(0);
-    fb->setCallback([this](float value) { cp->ks = value; });
-  }
-
   // Simulation constants
 
   new Label(window, "Simulation", "sans-bold");
@@ -477,34 +418,6 @@ void FluidSimulator::initGUI(Screen *screen) {
     num_steps->setSpinnable(true);
     num_steps->setMinValue(0);
     num_steps->setCallback([this](int value) { simulation_steps = value; });
-  }
-
-  // Damping slider and textbox
-
-  new Label(window, "Damping", "sans-bold");
-
-  {
-    Widget *panel = new Widget(window);
-    panel->setLayout(
-        new BoxLayout(Orientation::Horizontal, Alignment::Middle, 0, 5));
-
-    Slider *slider = new Slider(panel);
-    slider->setValue(cp->damping);
-    slider->setFixedWidth(105);
-
-    TextBox *percentage = new TextBox(panel);
-    percentage->setFixedWidth(75);
-    percentage->setValue(to_string(cp->damping));
-    percentage->setUnits("%");
-    percentage->setFontSize(14);
-
-    slider->setCallback([percentage](float value) {
-      percentage->setValue(std::to_string(value));
-    });
-    slider->setFinalCallback([&](float value) {
-      cp->damping = (double)value;
-      // cout << "Final slider value: " << (int)(value * 100) << endl;
-    });
   }
 
   // Gravity
@@ -567,47 +480,5 @@ void FluidSimulator::initGUI(Screen *screen) {
     cb->setCallback(
         [this, screen](int idx) { active_shader_idx = idx; });
     cb->setSelectedIndex(active_shader_idx);
-  }
-
-  // Shader Parameters
-
-  new Label(window, "Color", "sans-bold");
-
-  {
-    ColorWheel *cw = new ColorWheel(window, color);
-    cw->setColor(this->color);
-    cw->setCallback(
-        [this](const nanogui::Color &color) { this->color = color; });
-  }
-
-  new Label(window, "Parameters", "sans-bold");
-
-  {
-    Widget *panel = new Widget(window);
-    GridLayout *layout =
-        new GridLayout(Orientation::Horizontal, 2, Alignment::Middle, 5, 5);
-    layout->setColAlignment({Alignment::Maximum, Alignment::Fill});
-    layout->setSpacing(0, 10);
-    panel->setLayout(layout);
-
-    new Label(panel, "Normal :", "sans-bold");
-
-    FloatBox<double> *fb = new FloatBox<double>(panel);
-    fb->setEditable(true);
-    fb->setFixedSize(Vector2i(100, 20));
-    fb->setFontSize(14);
-    fb->setValue(this->m_normal_scaling);
-    fb->setSpinnable(true);
-    fb->setCallback([this](float value) { this->m_normal_scaling = value; });
-
-    new Label(panel, "Height :", "sans-bold");
-
-    fb = new FloatBox<double>(panel);
-    fb->setEditable(true);
-    fb->setFixedSize(Vector2i(100, 20));
-    fb->setFontSize(14);
-    fb->setValue(this->m_height_scaling);
-    fb->setSpinnable(true);
-    fb->setCallback([this](float value) { this->m_height_scaling = value; });
   }
 }
