@@ -12,6 +12,10 @@ void processInput(GLFWwindow* window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+// global variables
+bool is_paused = true;
+Fluid fluid;
+
 int main()
 {
     // glfw: initialize and configure
@@ -53,9 +57,9 @@ int main()
 
     // initalize fluid (somewhat hardcoded-in right now)
     // later we can support reading in parameters from json files
-    Fluid fluid = Fluid(5, 5, 5);
+    fluid = Fluid(5, 5, 5);
     float vertices[375];
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 125; i++) {
         vertices[i * 3] = fluid.particles[i].position.x;
         vertices[i * 3 + 1] = fluid.particles[i].position.y;
         vertices[i * 3 + 2] = fluid.particles[i].position.z;
@@ -89,6 +93,10 @@ int main()
     // unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    // activate shader
+    // ---------------
+    ourShader.use();
+
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -102,24 +110,23 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear depth buffer
 
-        // update positions of vertices
-        // also somewhat hardcoded in
-        vector<Vector3D> tmp;
-        fluid.simulate(0.0, 0.0, NULL, tmp, NULL);
-        for (int i = 0; i < 125; i++) {
-            vertices[i * 3] = fluid.particles[i].position.x;
-            vertices[i * 3 + 1] = fluid.particles[i].position.y;
-            vertices[i * 3 + 2] = fluid.particles[i].position.z;
+        if (!is_paused) {
+            // update positions of vertices
+            // also somewhat hardcoded in
+            vector<Vector3D> tmp;
+            fluid.simulate(0.0, 0.0, NULL, tmp, NULL);
+            for (int i = 0; i < 125; i++) {
+                vertices[i * 3] = fluid.particles[i].position.x;
+                vertices[i * 3 + 1] = fluid.particles[i].position.y;
+                vertices[i * 3 + 2] = fluid.particles[i].position.z;
+            }
+
+            // update the buffer with the new positions
+            glBindBuffer(GL_ARRAY_BUFFER, VBO);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+            glEnableVertexAttribArray(0);
         }
-
-        // use shader
-        ourShader.use();
-
-        // update the buffer with the new positions
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
 
         // draw
         glDrawArrays(GL_POINTS, 0, 125);
@@ -147,6 +154,10 @@ void processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+    else if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+        is_paused = !is_paused;
+    else if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+        fluid.reset();
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
