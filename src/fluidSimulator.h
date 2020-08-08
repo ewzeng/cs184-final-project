@@ -6,6 +6,7 @@
 
 #include "camera.h"
 #include "fluid.h"
+#include "particle.h"
 #include "collision/collisionObject.h"
 
 using namespace nanogui;
@@ -36,10 +37,9 @@ public:
 
 private:
   virtual void initGUI(Screen *screen);
-  void drawWireframe(GLShader &shader);
+  void drawParticles(GLShader &shader);
   
   void load_shaders();
-  void load_textures();
   
   // File management
   

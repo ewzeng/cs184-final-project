@@ -9,7 +9,6 @@
 #include "camera.h"
 #include "fluid.h"
 #include "collision/plane.h"
-#include "collision/sphere.h"
 #include "misc/camera_info.h"
 #include "misc/file_utils.h"
 // Needed to generate stb_image binaries. Should only define in exactly one source file importing stb_image.h.
@@ -83,7 +82,7 @@ FluidSimulator::~FluidSimulator() {
   }
 
   if (fluid) delete fluid;
-  if (cp) delete cp;
+  if (fp) delete fp;
   if (collision_objects) delete collision_objects;
 }
 
@@ -116,7 +115,7 @@ void FluidSimulator::init() {
   Vector3D avg_pm_position(0, 0, 0);
 
   for (auto &pm : fluid->particles) {
-    avg_pm_position += pm.particles / fluid->particles.size();
+    avg_pm_position += pm.position / fluid->particles.size();
   }
 
   CGL::Vector3D target(avg_pm_position.x, avg_pm_position.y / 2,
@@ -152,7 +151,7 @@ void FluidSimulator::drawContents() {
     vector<Vector3D> external_accelerations = {gravity};
 
     for (int i = 0; i < simulation_steps; i++) {
-      fluid->simulate(frames_per_sec, simulation_steps, cp, external_accelerations, collision_objects);
+      fluid->simulate(frames_per_sec, simulation_steps, fp, external_accelerations, collision_objects);
     }
   }
 

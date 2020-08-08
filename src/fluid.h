@@ -25,7 +25,7 @@ struct FluidParameters {
 
 struct Fluid {
   Fluid() {}
-  Fluid (int num_particles); // Only made one argument for simplicity. Feel free to add.
+  Fluid(int num_x, int num_y, int num_z);
   ~Fluid();
 
   void buildFluid();
@@ -40,6 +40,9 @@ struct Fluid {
 
   // Fluid properties
   int num_particles;
+  int num_x;
+  int num_y;
+  int num_z;
 
   // Fluid components
   vector<Particle> particles;
