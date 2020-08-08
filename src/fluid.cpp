@@ -46,7 +46,9 @@ void Fluid::buildFluid() {
 void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParameters *fp,
                      vector<Vector3D> external_accelerations,
                      vector<CollisionObject *> *collision_objects) {
-    // TODO
+    for (Particle& p : particles) {
+        p.position -= Vector3D(0.0001, 0.0001, 0);
+    }
 }
 
 void Fluid::self_collide(Particle &p, double simulation_steps) {

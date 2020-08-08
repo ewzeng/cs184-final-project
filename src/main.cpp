@@ -71,7 +71,7 @@ int main()
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -100,14 +100,30 @@ int main()
         processInput(window);
 
         // render
-        // ------
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear depth buffer
+        // -----
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear depth buffer
+
+        // update positions of vertices
+        vector<Vector3D> h;
+        fluid.simulate(0.0, 0.0, NULL, h, NULL);
+        for (int i = 0; i < 125; i++) {
+            vertices[i * 3] = fluid.particles[i].position.x;
+            vertices[i * 3 + 1] = fluid.particles[i].position.y;
+            vertices[i * 3 + 2] = fluid.particles[i].position.z;
+        }
 
         // draw some points
         ourShader.use();
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+        // I think we need this for dynamic updates
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0);
+
+        // draw
         glDrawArrays(GL_POINTS, 0, 125);
         // glBindVertexArray(0); // no need to unbind it every time 
 

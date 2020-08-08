@@ -8,12 +8,6 @@ void main()
     if (m > 1.0) {
         discard;
     }
-    
-    if (m > 0.8) {
-        out_color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-    } else if (m > 0.03) {
-        out_color = vec4(3.0f, 0.5f, 0.2f, 1.0f);
-    } else {
-        out_color = vec4(6.0f, 1.0f, 0.4f, 1.0f);
-    }
+
+    out_color = (1.0 - m) * vec4(3.0f, 0.5f, 0.2f, 1.0f);
 }
