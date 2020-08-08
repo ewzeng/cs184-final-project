@@ -2,12 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 
 # Cloth simulation source
 set(CLOTHSIM_VIEWER_SOURCE
-    # Cloth simulation objects
-    fluid.cpp
-
     # Application
     main.cpp
-    fluidSimulator.cpp
+    fluid.cpp
 
     # Miscellaneous
     # png.cpp
