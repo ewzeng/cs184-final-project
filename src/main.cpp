@@ -50,46 +50,44 @@ int main()
     // location differs in linux and windows
     // ------------------------------------
     Shader ourShader("../../../shaders/test.vert", "../../../shaders/test.frag"); 
-    
 
-    // set up vertex data (and buffer(s)) and configure vertex attributes
-    // ------------------------------------------------------------------
+    // initalize fluid (somewhat hardcoded-in right now)
+    // later we can support reading in parameters from json files
     Fluid fluid = Fluid(5, 5, 5);
     float vertices[375];
-    for (int i = 0; i < 125; i++) {
+    for (int i = 0; i < 5; i++) {
         vertices[i * 3] = fluid.particles[i].position.x;
         vertices[i * 3 + 1] = fluid.particles[i].position.y;
         vertices[i * 3 + 2] = fluid.particles[i].position.z;
     }
 
+    // set up OpenGL and configure OpenGL buffer objects with data
+    // ------------------------------------------------------------
     unsigned int VBO, VAO;
-
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
-    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and 
-    // then configure vertex attributes(s).
+
+    // bind the Vertex Array Object first
+    // as only one VAO is used in this code, we don't need to worry about unbinding
     glBindVertexArray(VAO);
 
+    // bind, setup vertex buffer, and fill with data
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
-
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    // able to draw points
+    // enable drawing points
     glEnable(GL_PROGRAM_POINT_SIZE);
     glPointSize(20);
 
-    // enable depth
+    // enable depth, Z-buffer
     glEnable(GL_DEPTH_TEST);
 
     // note that this is allowed, the call to glVertexAttribPointer registered VBO 
-    // as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+    // as the vertex attribute's bound vertex buffer object so afterwards we can safely
+    // unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-    // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-    glBindVertexArray(0);
 
     // render loop
     // -----------
@@ -105,19 +103,19 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear depth buffer
 
         // update positions of vertices
-        vector<Vector3D> h;
-        fluid.simulate(0.0, 0.0, NULL, h, NULL);
+        // also somewhat hardcoded in
+        vector<Vector3D> tmp;
+        fluid.simulate(0.0, 0.0, NULL, tmp, NULL);
         for (int i = 0; i < 125; i++) {
             vertices[i * 3] = fluid.particles[i].position.x;
             vertices[i * 3 + 1] = fluid.particles[i].position.y;
             vertices[i * 3 + 2] = fluid.particles[i].position.z;
         }
 
-        // draw some points
+        // use shader
         ourShader.use();
-        glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
-        // I think we need this for dynamic updates
+        // update the buffer with the new positions
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -125,7 +123,6 @@ int main()
 
         // draw
         glDrawArrays(GL_POINTS, 0, 125);
-        // glBindVertexArray(0); // no need to unbind it every time 
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -133,7 +130,7 @@ int main()
         glfwPollEvents();
     }
 
-    // optional: de-allocate all resources once they've outlived their purpose:
+    // de-allocate all resources once they've outlived their purpose:
     // ------------------------------------------------------------------------
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
