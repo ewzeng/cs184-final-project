@@ -6,7 +6,7 @@
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow* window);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 // settings
 const unsigned int SCR_WIDTH = 800;
@@ -15,6 +15,7 @@ const unsigned int SCR_HEIGHT = 600;
 // global variables
 bool is_paused = true;
 Fluid fluid;
+
 
 int main()
 {
@@ -40,6 +41,9 @@ int main()
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    
+    // set up so window is notified during keypress
+    glfwSetKeyCallback(window, key_callback);
 
     // glad: load all OpenGL function pointers
     // ---------------------------------------
@@ -97,16 +101,12 @@ int main()
     // ---------------
     ourShader.use();
 
+
+
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
     {
-        // input
-        // -----
-        processInput(window);
-
-        // render
-        // -----
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear depth buffer
 
@@ -148,16 +148,23 @@ int main()
     return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow* window)
+// process input
+// -------------
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-    else if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
-        is_paused = !is_paused;
-    else if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
-        fluid.reset();
+    if (action == GLFW_PRESS) {
+        switch (key) {
+        case GLFW_KEY_ESCAPE:
+            glfwSetWindowShouldClose(window, true);
+            break;
+        case GLFW_KEY_R:
+            fluid.reset();
+            break;
+        case GLFW_KEY_P:
+            is_paused = !is_paused;
+            break;
+        }
+    }
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
