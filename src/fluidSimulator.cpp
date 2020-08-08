@@ -52,7 +52,7 @@ void FluidSimulator::load_shaders() {
     nanogui_shader->initFromFiles(shader_name, vert_shader,
                                   m_project_root + "/shaders/" + shader_fname);
     
-    UserShader user_shader(shader_name, nanogui_shader, hint);
+    UserShader user_shader(shader_name, nanogui_shader);
     
     shaders.push_back(user_shader);
     shaders_combobox_names.push_back(shader_name);
@@ -122,7 +122,7 @@ void FluidSimulator::init() {
   CGL::Vector3D target(avg_pm_position.x, avg_pm_position.y / 2,
                        avg_pm_position.z);
   CGL::Vector3D c_dir(0., 0., 0.);
-  canonical_view_distance = max(fluid->width, fluid->height) * 0.9;
+  canonical_view_distance = 20; // CHANGE TO SOMETHING
   scroll_rate = canonical_view_distance / 10;
 
   view_distance = canonical_view_distance * 2;
