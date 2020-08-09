@@ -38,7 +38,7 @@ void Fluid::buildFluid() {
 void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParameters *fp,
                      vector<Vector3D> external_accelerations,
                      vector<CollisionObject *> *collision_objects) {
-    double mass = fp->particle_mass;
+    pmass = fp->particle_mass;
     double delta_t = 1.0f / frames_per_sec / simulation_steps;
 
 
@@ -53,7 +53,7 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
 
     // Find neighboring particles
     //---------------------------
-    // Idea: use an outside KDtree library
+    // Idea: use an outside KDtree library (nanoflann)
 
     // Tweak particle positions using fancy math
     // Perform collision detection
@@ -83,4 +83,25 @@ void Fluid::reset() {
     p->velocity = 0;
     p++;
   }
+}
+
+// Smoothing kernel, implemented as a simple cubic B-spline
+// h will be hardcoded in
+double Fluid::W(Vector3D x) {
+    // TODO
+    return 0.0;
+}
+
+// Density constraint for particle p
+double Fluid::C_i(Particle *p) {
+    return p->density_est / rho_0 - 1;
+}
+
+// Compute density estimate for particle p
+void Fluid::compute_density_est(Particle *p, vector<Particle*> *neighbors) {
+    p->density_est = 0;
+    for (int i = 0; i < neighbors->size(); i++) {
+        p->density_est += W(p->position - (*neighbors)[i]->position);
+    }
+    p->density_est *= pmass;
 }

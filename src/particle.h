@@ -20,6 +20,7 @@ struct Particle {
   Vector3D next_position;
   Vector3D forces;
   Vector3D velocity;
+  double density_est; // density estimate
 };
 
 #endif /* PARTICLE_H */

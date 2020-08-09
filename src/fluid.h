@@ -38,7 +38,14 @@ struct Fluid {
 
   void self_collide(Particle &p, double simulation_steps);
 
+  // computations from the paper Position Based Fluids
+  double W(Vector3D x); // smoothing kernel
+  double C_i(Particle *p); // density contraint
+  void compute_density_est(Particle *p, vector<Particle *> *neighbors); // compute density_est
+
   // Fluid properties
+  double rho_0 = 1; // rest density
+  double pmass; // particle mass
   int num_particles;
   int num_x;
   int num_y;
