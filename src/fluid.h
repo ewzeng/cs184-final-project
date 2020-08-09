@@ -45,6 +45,7 @@ struct Fluid {
   double grad_W(Vector3D x); // gradient of W
   double grad_p_k_C_i(Particle* p_k, Particle* p_i, vector<Particle*>* neighbors); // grad of C_i wrt p_k
   void compute_lambda_i(Particle* p_i, vector<Particle*>* neighbors); // compute lambda_i
+  void compute_position_update(Particle* p_i, vector<Particle*>* neighbors); // compute delta_pos
 
   // Fluid properties
   double rho_0 = 1; // rest density

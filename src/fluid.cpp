@@ -134,3 +134,15 @@ void Fluid::compute_lambda_i(Particle* p_i, vector<Particle*>* neighbors) {
     }
     p_i->lambda = -C_i(p_i) / denom;
 }
+
+// Compute p_i->delta_pos
+void Fluid::compute_position_update(Particle* p_i, vector<Particle*>* neighbors) {
+    p_i->delta_pos = 0;
+    for (int j = 0; j < neighbors->size(); j++) {
+        p_i->delta_pos += (p_i->lambda + (*neighbors)[j]->lambda)
+            * grad_W(p_i->next_position - (*neighbors)[j]->next_position);
+    }
+    p_i->delta_pos = p_i->delta_pos / rho_0;
+
+    // TODO INCORPORATE s_corr into delta_pos
+}

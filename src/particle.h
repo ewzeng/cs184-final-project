@@ -21,7 +21,8 @@ struct Particle {
   Vector3D forces;
   Vector3D velocity;
   double density_est; // density estimate
-  double lambda; // for updating the particle's postion
+  double lambda; // needed for the math
+  Vector3D delta_pos; // for updating the particle's position 
 };
 
 #endif /* PARTICLE_H */
