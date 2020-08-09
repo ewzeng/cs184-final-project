@@ -1,7 +1,7 @@
 /***********************************************************************
- * This file has been a heavily adapted mix of CS184 Project 4 as well as
+ * This file is a heavily adapted mix of CS184 Project 4 code as well as
  * code from learnopengl.com. The code from learnopengl.com is under the
- * CC BY 4.0 license published by Creative Commons. A link to this license
+ * CC BY 4.0 license published by Creative Commons. A link to the license
  * can be found here: https://creativecommons.org/licenses/by-nc/4.0/legalcode
  *************************************************************************/
 

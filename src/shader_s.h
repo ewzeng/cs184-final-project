@@ -1,3 +1,9 @@
+/***********************************************************************
+ * This file has been adapted from learnopengl.com. The code from learnopengl.com 
+ * is under the CC BY 4.0 license published by Creative Commons. A link to 
+ * the license can be found here: 
+ * https://creativecommons.org/licenses/by-nc/4.0/legalcode
+ *************************************************************************/
 #ifndef SHADER_H
 #define SHADER_H
 
