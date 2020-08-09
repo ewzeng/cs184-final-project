@@ -33,21 +33,41 @@ void Fluid::buildFluid() {
             }
         }
     }
-
-    //for (int i = 0; i < num_particles; i++) {
-    //    Vector3D pos;
-    //    pos.x = (rand() * 2.0/ RAND_MAX) - 1;
-    //    pos.y = (rand() * 2.0/ RAND_MAX) - 1;
-    //    pos.z = -1;
-    //    
-    //}
 }
 
 void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParameters *fp,
                      vector<Vector3D> external_accelerations,
                      vector<CollisionObject *> *collision_objects) {
+    double mass = fp->particle_mass;
+    double delta_t = 1.0f / frames_per_sec / simulation_steps;
+
+
+    // Apply external forces and predict position
+    //----------------------------------
     for (Particle& p : particles) {
-        p.position -= Vector3D(0.0001, 0.0001, 0);
+        for (Vector3D& a : external_accelerations) {
+            p.velocity += delta_t * a;
+        }
+        p.next_position = p.position + delta_t * p.velocity;
+    }
+
+    // Find neighboring particles
+    //---------------------------
+    // Idea: use an outside KDtree library
+
+    // Tweak particle positions using fancy math
+    // Perform collision detection
+    // Supposed to be a huge while loop
+    //------------------------------------------------------------------------
+
+    // Update velocity and apply confinements
+    //---------------------------------------
+    for (Particle& p : particles) {
+        p.velocity = (p.next_position - p.position) / delta_t;
+
+        // DO SOMETHING RELATED TO VORTICITY & CONFINEMENT
+
+        p.position = p.next_position;
     }
 }
 
@@ -59,7 +79,7 @@ void Fluid::reset() {
   Particle *p = &particles[0];
   for (int i = 0; i < particles.size(); i++) {
     p->position = p->start_position;
-    p->last_position = p->start_position;
+    p->next_position = p->start_position;
     p++;
   }
 }

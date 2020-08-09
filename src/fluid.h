@@ -15,12 +15,12 @@ using namespace std;
 
 struct FluidParameters {
   FluidParameters() {}
-  FluidParameters(double density)
-      : density(density) {}
+  FluidParameters(double pmass)
+      : particle_mass(pmass) {}
   ~FluidParameters() {}
 
   // Parameters
-  double density;
+  double particle_mass;
 };
 
 struct Fluid {

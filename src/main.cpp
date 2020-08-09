@@ -18,10 +18,17 @@ Matrix4f getViewMatrix();
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-// global variables
+// simulation variables
 bool is_paused = true;
-Fluid fluid;
+int frames_per_sec = 90;
+int simulation_steps = 30;
+
+// scene variables
 CGL::Camera camera;
+Fluid fluid;
+FluidParameters fp;
+vector<CollisionObject*> objects;
+vector<Vector3D> external_accelerations;
 
 int main()
 {
@@ -65,8 +72,9 @@ int main()
     // ------------------------------------
     Shader ourShader("../../../shaders/particle.vert", "../../../shaders/particle.frag"); 
 
-    // initalize fluid (somewhat hardcoded-in right now)
+    // initalize fluid and simulation variables
     // later we can support reading in parameters from json files
+    // ----------------------------------------------------------
     fluid = Fluid(5, 5, 5);
     float vertices[375];
     for (int i = 0; i < 125; i++) {
@@ -74,6 +82,9 @@ int main()
         vertices[i * 3 + 1] = fluid.particles[i].position.y;
         vertices[i * 3 + 2] = fluid.particles[i].position.z;
     }
+
+    fp = FluidParameters(1);
+    external_accelerations.emplace_back(0, -9.8, 0);
 
     // set up OpenGL and configure OpenGL buffer objects with data
     // ------------------------------------------------------------
@@ -138,8 +149,9 @@ int main()
 
         if (!is_paused) {
             // update positions of vertices (assuming 125 particles)
-            vector<Vector3D> tmp;
-            fluid.simulate(0.0, 0.0, NULL, tmp, NULL);
+            for (int i = 0; i < simulation_steps; i++) {
+                fluid.simulate(frames_per_sec, simulation_steps, &fp, external_accelerations, &objects);
+            }  
             for (int i = 0; i < 125; i++) {
                 vertices[i * 3] = fluid.particles[i].position.x;
                 vertices[i * 3 + 1] = fluid.particles[i].position.y;
