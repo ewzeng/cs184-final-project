@@ -1,3 +1,5 @@
+#define _USE_MATH_DEFINES
+
 #include <iostream>
 #include <math.h>
 #include <random>
@@ -117,18 +119,18 @@ void Fluid::compute_density_est(Particle *p, vector<Particle*> *neighbors) {
 }
 
 // The gradient of W
-double Fluid::grad_W(Vector3D x) {
+Vector3D Fluid::grad_W(Vector3D x) {
     // TODO (need to do some math on paper to figure out what this is)
-    return 0.0;
+    return Vector3D(0);
 }
 
 // The gradient of C_i with respective to p_k
-double Fluid::grad_p_k_C_i(Particle* p_k, Particle* p_i, vector<Particle*>* neighbors) {
+Vector3D Fluid::grad_p_k_C_i(Particle* p_k, Particle* p_i, vector<Particle*>* neighbors) {
     if (p_i != p_k) {
         return -grad_W(p_i->next_position - p_k->next_position);
     }
     
-    double sum = 0;
+    Vector3D sum = 0;
     for (int j = 0; j < neighbors->size(); j++) {
         sum += grad_W(p_i->next_position - (*neighbors)[j]->next_position);
     }
@@ -139,8 +141,7 @@ double Fluid::grad_p_k_C_i(Particle* p_k, Particle* p_i, vector<Particle*>* neig
 void Fluid::compute_lambda_i(Particle* p_i, vector<Particle*>* neighbors) {
     double denom = epsilon;
     for (int k = 0; k < neighbors->size(); k++) {
-        double tmp = grad_p_k_C_i((*neighbors)[k], p_i, neighbors);
-        denom = tmp * tmp;
+        denom += grad_p_k_C_i((*neighbors)[k], p_i, neighbors).norm2();
     }
     p_i->lambda = -C_i(p_i) / denom;
 }

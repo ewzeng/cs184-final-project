@@ -42,8 +42,8 @@ struct Fluid {
   double W(Vector3D x); // smoothing kernel
   double C_i(Particle *p); // density contraint
   void compute_density_est(Particle *p, vector<Particle *> *neighbors); // compute density_est
-  double grad_W(Vector3D x); // gradient of W
-  double grad_p_k_C_i(Particle* p_k, Particle* p_i, vector<Particle*>* neighbors); // grad of C_i wrt p_k
+  Vector3D grad_W(Vector3D x); // gradient of W
+  Vector3D grad_p_k_C_i(Particle* p_k, Particle* p_i, vector<Particle*>* neighbors); // grad of C_i wrt p_k
   void compute_lambda_i(Particle* p_i, vector<Particle*>* neighbors); // compute lambda_i
   void compute_position_update(Particle* p_i, vector<Particle*>* neighbors); // compute delta_pos
   double s_corr(Particle* p_i, Particle* p_j); // artifical pressure
