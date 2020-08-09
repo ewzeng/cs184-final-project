@@ -46,10 +46,13 @@ struct Fluid {
   double grad_p_k_C_i(Particle* p_k, Particle* p_i, vector<Particle*>* neighbors); // grad of C_i wrt p_k
   void compute_lambda_i(Particle* p_i, vector<Particle*>* neighbors); // compute lambda_i
   void compute_position_update(Particle* p_i, vector<Particle*>* neighbors); // compute delta_pos
+  double s_corr(Particle* p_i, Particle* p_j); // artifical pressure
 
   // Fluid properties
   double rho_0 = 1; // rest density
-  double pmass; // particle mass
+  double pmass = 1; // particle mass
+  double epsilon = 10; // the epsilon at the bottom of page 2
+  double h = 0.1; // the h param for the smooth kernel W 
   int num_particles;
   int num_x;
   int num_y;

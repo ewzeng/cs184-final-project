@@ -86,10 +86,20 @@ void Fluid::reset() {
 }
 
 // Smoothing kernel, implemented as a simple cubic B-spline
-// h will be hardcoded in
 double Fluid::W(Vector3D x) {
-    // TODO
-    return 0.0;
+    double z = x.norm() / h;
+    
+    // we can turn this into a global variables to make things a bit faster
+    double multiplier = 1 / (M_PI * h * h * h);
+    if (0 <= z && z <= 1) {
+        return 1 - 3 / 2 * z * z + 3 / 4 * z * z * z;
+    }
+    else if (z <= 2) {
+        1 / 4 * (2 - z) * (2 - z) * (2 - z);
+    }
+    else {
+        return 0;
+    }
 }
 
 // Density constraint for particle p
@@ -127,7 +137,7 @@ double Fluid::grad_p_k_C_i(Particle* p_k, Particle* p_i, vector<Particle*>* neig
 
 // Calculate lambda_i
 void Fluid::compute_lambda_i(Particle* p_i, vector<Particle*>* neighbors) {
-    double denom = 10; // the epsilon at the bottom of page 2
+    double denom = epsilon;
     for (int k = 0; k < neighbors->size(); k++) {
         double tmp = grad_p_k_C_i((*neighbors)[k], p_i, neighbors);
         denom = tmp * tmp;
@@ -139,10 +149,14 @@ void Fluid::compute_lambda_i(Particle* p_i, vector<Particle*>* neighbors) {
 void Fluid::compute_position_update(Particle* p_i, vector<Particle*>* neighbors) {
     p_i->delta_pos = 0;
     for (int j = 0; j < neighbors->size(); j++) {
-        p_i->delta_pos += (p_i->lambda + (*neighbors)[j]->lambda)
+        p_i->delta_pos += (p_i->lambda + (*neighbors)[j]->lambda + s_corr(p_i, (*neighbors)[j]))
             * grad_W(p_i->next_position - (*neighbors)[j]->next_position);
     }
     p_i->delta_pos = p_i->delta_pos / rho_0;
+}
 
-    // TODO INCORPORATE s_corr into delta_pos
+// Compute s_corr, the artifical pressure term
+double Fluid::s_corr(Particle* p_i, Particle* p_j) {
+    // TODO
+    return 0.0;
 }
