@@ -80,6 +80,7 @@ void Fluid::reset() {
   for (int i = 0; i < particles.size(); i++) {
     p->position = p->start_position;
     p->next_position = p->start_position;
+    p->velocity = 0;
     p++;
   }
 }

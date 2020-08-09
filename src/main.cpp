@@ -20,7 +20,7 @@ const unsigned int SCR_HEIGHT = 600;
 
 // simulation variables
 bool is_paused = true;
-int frames_per_sec = 90;
+int frames_per_sec = 9000; // CHANGE LATER - JUST TEMP HERE TO SLOW DOWN THE ANIMATION
 int simulation_steps = 30;
 
 // scene variables
