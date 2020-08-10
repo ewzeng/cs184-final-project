@@ -10,11 +10,11 @@ using namespace CGL;
 
 void Plane::collide(Particle &pm) {
     // TODO (Part 3): Handle collisions with planes.
-    double lp = dot(pm.last_position - point, normal);
-    double p = dot(pm.position - point, normal);
+    double lp = dot(pm.position - point, normal);
+    double p = dot(pm.next_position - point, normal);
     if ((lp >= 0 && p < 0) || (lp <= 0 && p > 0)) {
-         Vector3D tangent = pm.position - p * normal;
+         Vector3D tangent = pm.next_position - p * normal;
          tangent -= p / abs(p) * SURFACE_OFFSET * normal;
-         pm.position = pm.last_position + (tangent - pm.last_position) * (1 - friction);
+         pm.next_position = pm.position + (tangent - pm.position) * (1 - friction);
     }
 }

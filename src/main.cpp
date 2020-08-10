@@ -14,6 +14,7 @@
 #include "camera.h"
 #include "shader_s.h"
 #include "fluid.h"
+#include "collision/plane.h"
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -92,6 +93,10 @@ int main()
 
     fp = FluidParameters(1);
     external_accelerations.emplace_back(0, -9.8, 0);
+
+    // set up some collision objects
+    //Plane* p = new Plane(Vector3D(0), Vector3D(0,1,0), 0.2);
+    //objects.push_back(p);
 
     // set up OpenGL and configure OpenGL buffer objects with data
     // ------------------------------------------------------------

@@ -64,6 +64,13 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
     // Supposed to be a huge while loop
     //------------------------------------------------------------------------
 
+    // Test collision detection:
+    for (int i = 0; i < collision_objects->size(); i++) {
+        for (Particle& p : particles) {
+            (*collision_objects)[i]->collide(p);
+        }
+    }
+
     // Update velocity and apply confinements
     //---------------------------------------
     for (Particle& p : particles) {
