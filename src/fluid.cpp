@@ -58,6 +58,16 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
     // Find neighboring particles
     //---------------------------
     // Idea: use an outside KDtree library (nanoflann)
+    // Test code here
+    vector <vector<Particle*>*> neighbor_lookup;
+    for (int i = 0; i < particles.size(); i++) {
+        neighbor_lookup.push_back(new vector<Particle*>());
+        for (int j = 0; j < particles.size(); j++) {
+            if (i != j) {
+                neighbor_lookup[i]->push_back(&particles[j]);
+            }
+        }
+    }
 
     // Tweak particle positions using fancy math
     // Perform collision detection
