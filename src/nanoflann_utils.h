@@ -26,18 +26,16 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *************************************************************************/
 
+#ifndef NANOFLANN_UTILS_H
+#define NANOFLANN_UTILS_H
+
 #include <cstdlib>
 #include <iostream>
+#include "particle.h"
 
-template <typename T>
 struct PointCloud
 {
-	struct Point
-	{
-		T  x, y, z;
-	};
-
-	std::vector<Point>  pts;
+	std::vector<Particle*> pts;
 
 	// Must return the number of data points
 	inline size_t kdtree_get_point_count() const { return pts.size(); }
@@ -45,11 +43,11 @@ struct PointCloud
 	// Returns the dim'th component of the idx'th point in the class:
 	// Since this is inlined and the "dim" argument is typically an immediate value, the
 	//  "if/else's" are actually solved at compile time.
-	inline T kdtree_get_pt(const size_t idx, const size_t dim) const
+	inline double kdtree_get_pt(const size_t idx, const size_t dim) const
 	{
-		if (dim == 0) return pts[idx].x;
-		else if (dim == 1) return pts[idx].y;
-		else return pts[idx].z;
+		if (dim == 0) return pts[idx]->next_position.x;
+		else if (dim == 1) return pts[idx]->next_position.y;
+		else return pts[idx]->next_position.z;
 	}
 
 	// Optional bounding-box computation: return false to default to a standard bbox computation loop.
@@ -57,5 +55,6 @@ struct PointCloud
 	//   Look at bb.size() to find out the expected dimensionality (e.g. 2 or 3 for point clouds)
 	template <class BBOX>
 	bool kdtree_get_bbox(BBOX& /* bb */) const { return false; }
-
 };
+
+#endif /* NANOFLANN_UTILS_H */

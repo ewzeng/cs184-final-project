@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "misc/nanoflann.hpp"
+#include "nanoflann_utils.h"
 #include "fluid.h"
 #include "collision/plane.h"
 
