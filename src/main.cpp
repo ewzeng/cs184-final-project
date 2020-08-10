@@ -141,7 +141,7 @@ int main()
     camera.place(target, acos(c_dir.y), atan2(c_dir.x, c_dir.z), 1.0, 0.2, 20.);
     camera.configure(camera_info, SCR_WIDTH, SCR_HEIGHT);
 
-    // calculate and input the perspective transfromations into the shader
+    // calculate and input the perspective transformations into the shader
     Matrix4f view = getViewMatrix();
     Matrix4f projection = getProjectionMatrix();
     Matrix4f viewProjection = projection * view;
