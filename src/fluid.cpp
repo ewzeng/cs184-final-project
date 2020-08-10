@@ -5,6 +5,7 @@
 #include <random>
 #include <vector>
 
+#include "misc/nanoflann.hpp"
 #include "fluid.h"
 #include "collision/plane.h"
 
