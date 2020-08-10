@@ -90,14 +90,12 @@ void Fluid::reset() {
 // Smoothing kernel, implemented as a simple cubic B-spline
 double Fluid::W(Vector3D x) {
     double z = x.norm() / h;
-    
-    // we can turn this into a global variables to make things a bit faster
-    double multiplier = 1 / (M_PI * h * h * h);
+    double multiplier = 1 / (M_PI * h * h * h); // this into a global variables to make things a bit faster
     if (0 <= z && z <= 1) {
-        return 1 - 3 / 2 * z * z + 3 / 4 * z * z * z;
+        return (1 - 3 / 2 * z * z + 3 / 4 * z * z * z) * multiplier;
     }
     else if (z <= 2) {
-        1 / 4 * (2 - z) * (2 - z) * (2 - z);
+        return 1 / 4 * (2 - z) * (2 - z) * (2 - z) * multiplier;
     }
     else {
         return 0;
@@ -120,8 +118,23 @@ void Fluid::compute_density_est(Particle *p, vector<Particle*> *neighbors) {
 
 // The gradient of W
 Vector3D Fluid::grad_W(Vector3D x) {
-    // TODO (need to do some math on paper to figure out what this is)
-    return Vector3D(0);
+    // By rotational symmetry, the steepest slope should be pointing towards the origin
+    // We exploit this symmetry to do some clever tricks to compute the gradient
+    // Be careful of signs! u points toward the origin, but when computing the abs value of the
+    // gradient, we get some negative signs that we have to negate.
+
+    Vector3D u = -x.unit();
+    double z = x.norm() / h;
+    double multiplier = 1 / (M_PI * h * h * h); // this into a global variables to make things a bit faster
+    if (0 <= z && z <= 1) {
+        return -(-3 * z + 9 / 4 * z * z) / h * multiplier * u;
+    }
+    else if (z <= 2) {
+        return -3 / 4 * (2 - z) * (2 - z) * (-z) / h * multiplier * u;
+    }
+    else {
+        return Vector3D(0);
+    }
 }
 
 // The gradient of C_i with respective to p_k
