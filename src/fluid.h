@@ -4,10 +4,11 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <vector>
+#include <nanogui/nanogui.h>
 
 #include "CGL/CGL.h"
 #include "CGL/misc.h"
-#include "collision/collisionObject.h"
+#include "collision/plane.h"
 #include "particle.h"
 
 using namespace CGL;
@@ -32,7 +33,7 @@ struct Fluid {
 
   void simulate(double frames_per_sec, double simulation_steps, FluidParameters *fp,
                 vector<Vector3D> external_accelerations,
-                vector<CollisionObject *> *collision_objects);
+                vector<Plane *> *collision_objects);
 
   void reset();
 

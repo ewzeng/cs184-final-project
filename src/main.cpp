@@ -10,12 +10,14 @@
 
 #include <CGL/vector3D.h>
 #include <nanogui/nanogui.h>
+#include <iostream>
 
 #include "camera.h"
 #include "shader_s.h"
 #include "fluid.h"
 #include "collision/plane.h"
-#include <iostream>
+
+using namespace nanogui;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -35,7 +37,7 @@ int simulation_steps = 30;
 CGL::Camera camera;
 Fluid fluid;
 FluidParameters fp;
-vector<CollisionObject*> objects;
+vector<Plane*> objects;
 vector<Vector3D> external_accelerations;
 
 int main()
@@ -95,8 +97,8 @@ int main()
     external_accelerations.emplace_back(0, -9.8, 0);
 
     // set up some collision objects
-    //Plane* p = new Plane(Vector3D(0), Vector3D(0,1,0), 0.2);
-    //objects.push_back(p);
+    Plane p = Plane(Vector3D(0), Vector3D(0, 1, 0), 1.0);
+    objects.push_back(&p);
 
     // set up OpenGL and configure OpenGL buffer objects with data
     // ------------------------------------------------------------
