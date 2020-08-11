@@ -188,7 +188,7 @@ void Fluid::compute_neighbors() {
         target[1] = particles[i].next_position.y;
         target[2] = particles[i].next_position.z;
 
-        size_t nMatches = kdtree->radiusSearch(&target[0], h, ret_matches, params);
+        size_t nMatches = kdtree->radiusSearch(&target[0], 2 * h, ret_matches, params);
         for (size_t i = 0; i < nMatches; i++) {
             neighbors->push_back(&(particles[ret_matches[i].first]));
         }
@@ -240,7 +240,7 @@ Vector3D Fluid::grad_W(Vector3D x) {
         return -(-3 * z + 9 / 4 * z * z) / h * multiplier * u;
     }
     else if (z <= 2) {
-        return -3 / 4 * (2 - z) * (2 - z) * (-z) / h * multiplier * u;
+        return -3 / 4 * (2 - z) * (2 - z) * (-1) / h * multiplier * u;
     }
     else {
         return Vector3D(0);
@@ -250,7 +250,7 @@ Vector3D Fluid::grad_W(Vector3D x) {
 // The gradient of C_i with respective to p_k
 Vector3D Fluid::grad_p_k_C_i(Particle* p_k, Particle* p_i, vector<Particle*>* neighbors) {
     if (p_i != p_k) {
-        return -grad_W(p_i->next_position - p_k->next_position);
+        return -grad_W(p_i->next_position - p_k->next_position) / rho_0;
     }
     
     Vector3D sum = 0;
