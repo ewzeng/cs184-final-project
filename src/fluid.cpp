@@ -189,8 +189,10 @@ void Fluid::compute_neighbors() {
         target[2] = particles[i].next_position.z;
 
         size_t nMatches = kdtree->radiusSearch(&target[0], 2 * h, ret_matches, params);
-        for (size_t i = 0; i < nMatches; i++) {
-            neighbors->push_back(&(particles[ret_matches[i].first]));
+        for (size_t j = 0; j < nMatches; j++) {
+            if (i != ret_matches[j].first) {
+                neighbors->push_back(&(particles[ret_matches[j].first]));
+            }
         }
     }
 }

@@ -33,7 +33,7 @@ bool is_paused = true;
 int frames_per_sec = 15; // CHANGE LATER - JUST TEMP HERE TO SLOW DOWN THE ANIMATION
 int simulation_steps = 2;
 
-#define NUM_PARTICLES 1000
+#define NUM_PARTICLES 100
 
 // scene variables
 CGL::Camera camera;
