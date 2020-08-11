@@ -73,7 +73,7 @@ struct Fluid {
   // Neighbor map
   vector <vector<Particle*>*> neighbor_lookup;
   PointCloud cloud;
-  KDTreeSingleIndexAdaptor< L2_Simple_Adaptor<double, PointCloud>, PointCloud, 3 > *kdtree;
+  KDTreeSingleIndexAdaptor<L2_Simple_Adaptor<double, PointCloud>, PointCloud, 3> *kdtree = NULL;
 };
 
 #endif /* FLUID_H */

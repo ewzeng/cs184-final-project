@@ -160,7 +160,12 @@ void Fluid::build_kdtree() {
     for (int i = 0; i < particles.size(); i++) {
         cloud.pts.push_back(&particles[i]);
     }
-    // TODO
+
+    // Build kdtree
+    if (kdtree != NULL) free(kdtree);
+    kdtree = new KDTreeSingleIndexAdaptor<L2_Simple_Adaptor<double, PointCloud>, 
+                PointCloud, 3>(3, cloud, KDTreeSingleIndexAdaptorParams());
+    kdtree->buildIndex();
 }
 
 // Smoothing kernel, implemented as a simple cubic B-spline
