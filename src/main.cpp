@@ -31,9 +31,9 @@ const unsigned int SCR_HEIGHT = 600;
 // simulation variables
 bool is_paused = true;
 int frames_per_sec = 15; // CHANGE LATER - JUST TEMP HERE TO SLOW DOWN THE ANIMATION
-int simulation_steps = 10;
+int simulation_steps = 2;
 
-#define NUM_PARTICLES 10000
+#define NUM_PARTICLES 1000
 
 // scene variables
 CGL::Camera camera;
@@ -132,7 +132,7 @@ int main()
 
     // enable drawing points
     glEnable(GL_PROGRAM_POINT_SIZE);
-    glPointSize(20);
+    glPointSize(10);
 
     // enable depth, Z-buffer
     glEnable(GL_DEPTH_TEST);

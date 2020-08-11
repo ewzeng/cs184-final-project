@@ -59,8 +59,8 @@ struct Fluid {
   double rho_0 = 100; // rest density
   double pmass = 1; // particle mass
   double epsilon = 10000; // the epsilon at the bottom of page 2
-  double h = 0.01; // the h param for the smooth kernel W 
-  double particle_radius = 0.0001; // for particle collision
+  double h = 0.1; // the h param for the smooth kernel W 
+  double particle_radius = 0.01; // for particle collision
   int solver_iterations = 1;
   int num_particles;
   int num_x;
