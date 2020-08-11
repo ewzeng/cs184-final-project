@@ -263,6 +263,7 @@ Vector3D Fluid::grad_p_k_C_i(Particle* p_k, Particle* p_i, vector<Particle*>* ne
 }
 
 // Calculate lambda_i
+// Make sure we call compute_density_est before
 void Fluid::compute_lambda_i(Particle* p_i, vector<Particle*>* neighbors) {
     double denom = epsilon;
     for (int k = 0; k < neighbors->size(); k++) {
@@ -272,6 +273,7 @@ void Fluid::compute_lambda_i(Particle* p_i, vector<Particle*>* neighbors) {
 }
 
 // Compute p_i->delta_pos
+// Make sure we call compute_lambda_i before
 void Fluid::compute_position_update(Particle* p_i, vector<Particle*>* neighbors) {
     p_i->delta_pos = 0;
     for (int j = 0; j < neighbors->size(); j++) {
