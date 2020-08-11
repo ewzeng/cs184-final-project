@@ -56,8 +56,8 @@ struct Fluid {
   double s_corr(Particle* p_i, Particle* p_j); // artifical pressure
 
   // Fluid properties
-  double rho_0 = 18; // rest density
-  double pmass = 1; // particle mass; tweak particle mass in FluidParameters
+  double rho_0 = 1; // rest density
+  double pmass = 0.001; // particle mass
   double epsilon = 0.1; // the epsilon at the bottom of page 2
   double h = 0.08; // the h param for the smooth kernel W 
   double particle_radius = 0.01; // for particle collision

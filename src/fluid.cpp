@@ -55,7 +55,6 @@ void Fluid::buildFluid() {
 void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParameters *fp,
                      vector<Vector3D> external_accelerations,
                      vector<Plane *> *collision_objects) {
-    pmass = fp->particle_mass;
     double delta_t = 1.0f / frames_per_sec / simulation_steps;
 
 
