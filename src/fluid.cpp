@@ -115,7 +115,6 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
         for (Particle& p : particles) {
             p.next_position += p.delta_pos;
         }
-
     }
 
     // Update velocity and apply confinements
@@ -154,6 +153,14 @@ void Fluid::reset() {
     p->velocity = 0;
     p++;
   }
+}
+
+void Fluid::build_kdtree() {
+    // Build pointcloud
+    for (int i = 0; i < particles.size(); i++) {
+        cloud.pts.push_back(&particles[i]);
+    }
+    // TODO
 }
 
 // Smoothing kernel, implemented as a simple cubic B-spline

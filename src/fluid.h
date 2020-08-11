@@ -10,9 +10,12 @@
 #include "CGL/misc.h"
 #include "collision/plane.h"
 #include "particle.h"
+#include "misc/nanoflann.hpp"
+#include "nanoflann_utils.h"
 
 using namespace CGL;
 using namespace std;
+using namespace nanoflann;
 
 struct FluidParameters {
   FluidParameters() {}
@@ -39,6 +42,8 @@ struct Fluid {
   void reset();
 
   void self_collide(int i, double simulation_steps); // dealing with the particle partices[i]
+
+  void build_kdtree(); // build kdtree for finding neighbors
 
   // computations from the paper Position Based Fluids
   double W(Vector3D x); // smoothing kernel
@@ -67,6 +72,8 @@ struct Fluid {
 
   // Neighbor map
   vector <vector<Particle*>*> neighbor_lookup;
+  PointCloud cloud;
+  KDTreeSingleIndexAdaptor< L2_Simple_Adaptor<double, PointCloud>, PointCloud, 3 > *kdtree;
 };
 
 #endif /* FLUID_H */
