@@ -155,8 +155,10 @@ void Fluid::reset() {
   }
 }
 
-void Fluid::build_kdtree() {
+// Part of the structure of this function comes from examples provided in the nanoflann library
+void Fluid::compute_neighbors() {
     // Build pointcloud
+    cloud.pts.clear();
     for (int i = 0; i < particles.size(); i++) {
         cloud.pts.push_back(&particles[i]);
     }
@@ -166,12 +168,37 @@ void Fluid::build_kdtree() {
     kdtree = new KDTreeSingleIndexAdaptor<L2_Simple_Adaptor<double, PointCloud>, 
                 PointCloud, 3>(3, cloud, KDTreeSingleIndexAdaptorParams());
     kdtree->buildIndex();
+
+    // Clear neighbor_lookup (this assumes we are creating on heap)
+    for (int i = 0; i < neighbor_lookup.size(); i++) {
+        free(neighbor_lookup[i]);
+    }
+    neighbor_lookup.clear();
+
+    // create neighbor_lookup
+    SearchParams params;
+    params.sorted = false; // I think sorting takes more time
+    vector<std::pair<size_t, double> > ret_matches; // Should we put this inside or outside the loop?
+
+    for (int i = 0; i < particles.size(); i++) {
+        vector<Particle*>* neighbors = new vector<Particle*>();
+        neighbor_lookup.push_back(neighbors);
+        double target[3];
+        target[0] = particles[i].next_position.x;
+        target[1] = particles[i].next_position.y;
+        target[2] = particles[i].next_position.z;
+
+        size_t nMatches = kdtree->radiusSearch(&target[0], h, ret_matches, params);
+        for (size_t i = 0; i < nMatches; i++) {
+            neighbors->push_back(&(particles[ret_matches[i].first]));
+        }
+    }
 }
 
 // Smoothing kernel, implemented as a simple cubic B-spline
 double Fluid::W(Vector3D x) {
     double z = x.norm() / h;
-    double multiplier = 1 / (M_PI * h * h * h); // this into a global variables to make things a bit faster
+    double multiplier = 1 / (M_PI * h * h * h); // turn this into a global to make things a bit faster
     if (0 <= z && z <= 1) {
         return (1 - 3 / 2 * z * z + 3 / 4 * z * z * z) * multiplier;
     }

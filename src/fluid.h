@@ -43,7 +43,7 @@ struct Fluid {
 
   void self_collide(int i, double simulation_steps); // dealing with the particle partices[i]
 
-  void build_kdtree(); // build kdtree for finding neighbors
+  void compute_neighbors(); // compute neighbor_lookup
 
   // computations from the paper Position Based Fluids
   double W(Vector3D x); // smoothing kernel
