@@ -45,9 +45,9 @@ void Fluid::buildFluid() {
 
     for (int i = 0; i < num_particles; i++) {
         Vector3D pos;
-        pos.x = (rand() * 1.0/ RAND_MAX) - 0.5;
+        pos.x = (rand() * 0.1/ RAND_MAX) - 0.05;
         pos.y = (rand() * 0.5/ RAND_MAX);
-        pos.z = - (rand() * 1.0 / RAND_MAX);
+        pos.z = - (rand() * 0.3 / RAND_MAX);
         particles.emplace_back(pos);
     }
 }

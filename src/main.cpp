@@ -99,15 +99,15 @@ int main()
     external_accelerations.emplace_back(0, -9.8, 0);
 
     // set up some collision objects
-    Plane bottom = Plane(Vector3D(0, -0.2, 0), Vector3D(0, 1, 0), 1);
+    Plane bottom = Plane(Vector3D(0, -0.2, 0), Vector3D(0, 1, 0), 0.3);
     objects.push_back(&bottom);
-    Plane back = Plane(Vector3D(0, 0, -1), Vector3D(0, 0, 1), 1);
+    Plane back = Plane(Vector3D(0, 0, -1), Vector3D(0, 0, 1), 0.3);
     objects.push_back(&back);
-    Plane right = Plane(Vector3D(0.6, 0, 0), Vector3D(-1, 0, 0), 0.5);
+    Plane right = Plane(Vector3D(0.6, 0, 0), Vector3D(-1, 0, 0), 0.3);
     objects.push_back(&right);
-    Plane left = Plane(Vector3D(-0.6, 0, 0), Vector3D(1, 0, 0), 0.5);
+    Plane left = Plane(Vector3D(-0.6, 0, 0), Vector3D(1, 0, 0), 0.3);
     objects.push_back(&left);
-    Plane front = Plane(Vector3D(0, 0, 0.1), Vector3D(0, 0, -1), 0.5);
+    Plane front = Plane(Vector3D(0, 0, 0.1), Vector3D(0, 0, -1), 0.3);
     objects.push_back(&front);
 
     // set a cover for testing
