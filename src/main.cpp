@@ -31,7 +31,7 @@ const unsigned int SCR_HEIGHT = 600;
 // simulation variables
 bool is_paused = true;
 int frames_per_sec = 90; // CHANGE LATER - JUST TEMP HERE TO SLOW DOWN THE ANIMATION
-int simulation_steps = 30;
+int simulation_steps = 10;
 
 // scene variables
 CGL::Camera camera;
@@ -107,6 +107,10 @@ int main()
     objects.push_back(&left);
     Plane front = Plane(Vector3D(0, 0, 0.1), Vector3D(0, 0, -1), 1.0);
     objects.push_back(&front);
+
+    // set a cover for testing
+    Plane top = Plane(Vector3D(0, 0.6, 0), Vector3D(0, -1, 0), 0.5);
+    objects.push_back(&top);
 
     // set up OpenGL and configure OpenGL buffer objects with data
     // ------------------------------------------------------------

@@ -15,12 +15,13 @@ public:
       : point(point), normal(normal.unit()), friction(friction) {}
 
   void collide(Particle& pm) {
+      Vector3D next = pm.next_position + pm.delta_pos;
       double lp = dot(pm.position - point, normal);
-      double p = dot(pm.next_position - point, normal);
+      double p = dot(next - point, normal);
       if ((lp >= 0 && p < 0) || (lp <= 0 && p > 0)) {
-          Vector3D tangent = pm.next_position - p * normal;
+          Vector3D tangent = next - p * normal;
           tangent -= p / abs(p) * SURFACE_OFFSET * normal;
-          pm.next_position = pm.position + (tangent - pm.position) * (1 - friction);
+          pm.delta_pos = pm.position + (tangent - pm.position) * (1 - friction) - pm.next_position;
       }
   }
 

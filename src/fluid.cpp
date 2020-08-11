@@ -58,7 +58,7 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
     // Find neighboring particles
     //---------------------------
     // Idea: use an outside KDtree library (nanoflann)
-    // Test code here
+    // Placeholder code here
     vector <vector<Particle*>*> neighbor_lookup;
     for (int i = 0; i < particles.size(); i++) {
         neighbor_lookup.push_back(new vector<Particle*>());
@@ -74,10 +74,26 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
     // Supposed to be a huge while loop
     //------------------------------------------------------------------------
 
-    // Test collision detection:
-    for (int i = 0; i < collision_objects->size(); i++) {
+    for (int it = 0; it < solver_iterations; it++) {
+        for (int i = 0; i < particles.size(); i++) {
+            compute_lambda_i(&particles[i], neighbor_lookup[i]);
+        }
+        for (int i = 0; i < particles.size(); i++) {
+            compute_position_update(&particles[i], neighbor_lookup[i]);
+        }
+
+        // Testing code
+        //for (int i = 0; i < particles.size(); i++) {
+        //    particles[i].delta_pos = Vector3D(0, 0.000001, 0);
+        //}
+
+        for (int i = 0; i < collision_objects->size(); i++) {
+            for (Particle& p : particles) {
+                (*collision_objects)[i]->collide(p);
+            }
+        }
         for (Particle& p : particles) {
-            (*collision_objects)[i]->collide(p);
+            p.next_position += p.delta_pos;
         }
     }
 
@@ -90,6 +106,7 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
 
         p.position = p.next_position;
     }
+
 }
 
 void Fluid::self_collide(Particle &p, double simulation_steps) {
