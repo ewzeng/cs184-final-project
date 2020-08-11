@@ -68,19 +68,19 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
         p.next_position = p.position + delta_t * p.velocity;
     }
 
-    // Find neighboring particles
+    // Find neighboring particles (using nanoflann)
     //---------------------------
-    // Idea: use an outside KDtree library (nanoflann)
-    // Placeholder code here
-    neighbor_lookup.clear(); // should I free each entry first?
-    for (int i = 0; i < particles.size(); i++) {
-        neighbor_lookup.push_back(new vector<Particle*>());
-        for (int j = 0; j < particles.size(); j++) {
-            if (i != j) {
-                neighbor_lookup[i]->push_back(&particles[j]);
-            }
-        }
-    }
+    compute_neighbors();
+    //// Placeholder code here
+    //neighbor_lookup.clear(); // should I free each entry first?
+    //for (int i = 0; i < particles.size(); i++) {
+    //    neighbor_lookup.push_back(new vector<Particle*>());
+    //    for (int j = 0; j < particles.size(); j++) {
+    //        if (i != j) {
+    //            neighbor_lookup[i]->push_back(&particles[j]);
+    //        }
+    //    }
+    //}
 
     // Tweak particle positions using fancy math
     // Perform collision detection

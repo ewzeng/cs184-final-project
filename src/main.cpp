@@ -30,8 +30,10 @@ const unsigned int SCR_HEIGHT = 600;
 
 // simulation variables
 bool is_paused = true;
-int frames_per_sec = 90; // CHANGE LATER - JUST TEMP HERE TO SLOW DOWN THE ANIMATION
+int frames_per_sec = 15; // CHANGE LATER - JUST TEMP HERE TO SLOW DOWN THE ANIMATION
 int simulation_steps = 10;
+
+#define NUM_PARTICLES 10000
 
 // scene variables
 CGL::Camera camera;
@@ -85,9 +87,9 @@ int main()
     // initalize fluid and simulation variables
     // later we can support reading in parameters from json files
     // ----------------------------------------------------------
-    fluid = Fluid(200);
-    float vertices[600];
-    for (int i = 0; i < 200; i++) {
+    fluid = Fluid(NUM_PARTICLES);
+    float vertices[NUM_PARTICLES * 3];
+    for (int i = 0; i < NUM_PARTICLES; i++) {
         vertices[i * 3] = fluid.particles[i].position.x;
         vertices[i * 3 + 1] = fluid.particles[i].position.y;
         vertices[i * 3 + 2] = fluid.particles[i].position.z;
@@ -174,11 +176,11 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear buffers
 
         if (!is_paused) {
-            // update positions of vertices (assuming 125 particles)
+            // update positions of vertices
             for (int i = 0; i < simulation_steps; i++) {
                 fluid.simulate(frames_per_sec, simulation_steps, &fp, external_accelerations, &objects);
             }  
-            for (int i = 0; i < 200; i++) {
+            for (int i = 0; i < NUM_PARTICLES; i++) {
                 vertices[i * 3] = fluid.particles[i].position.x;
                 vertices[i * 3 + 1] = fluid.particles[i].position.y;
                 vertices[i * 3 + 2] = fluid.particles[i].position.z;
@@ -191,8 +193,8 @@ int main()
             glEnableVertexAttribArray(0);
         }
 
-        // draw (assuming 125 particles)
-        glDrawArrays(GL_POINTS, 0, 200);
+        // draw
+        glDrawArrays(GL_POINTS, 0, NUM_PARTICLES);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
