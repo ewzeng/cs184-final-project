@@ -27,6 +27,7 @@ struct FluidParameters {
 struct Fluid {
   Fluid() {}
   Fluid(int num_x, int num_y, int num_z);
+  Fluid(int num);
   ~Fluid();
 
   void buildFluid();
@@ -37,7 +38,7 @@ struct Fluid {
 
   void reset();
 
-  void self_collide(Particle &p, double simulation_steps);
+  void self_collide(int i, double simulation_steps); // dealing with the particle partices[i]
 
   // computations from the paper Position Based Fluids
   double W(Vector3D x); // smoothing kernel
@@ -50,10 +51,11 @@ struct Fluid {
   double s_corr(Particle* p_i, Particle* p_j); // artifical pressure
 
   // Fluid properties
-  double rho_0 = 1; // rest density
+  double rho_0 = 100; // rest density
   double pmass = 1; // particle mass
-  double epsilon = 100; // the epsilon at the bottom of page 2
-  double h = 0.1; // the h param for the smooth kernel W 
+  double epsilon = 10000; // the epsilon at the bottom of page 2
+  double h = 0.01; // the h param for the smooth kernel W 
+  double particle_radius = 0.0001; // for particle collision
   int solver_iterations = 1;
   int num_particles;
   int num_x;
@@ -62,6 +64,9 @@ struct Fluid {
 
   // Fluid components
   vector<Particle> particles;
+
+  // Neighbor map
+  vector <vector<Particle*>*> neighbor_lookup;
 };
 
 #endif /* FLUID_H */

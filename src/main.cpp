@@ -85,9 +85,9 @@ int main()
     // initalize fluid and simulation variables
     // later we can support reading in parameters from json files
     // ----------------------------------------------------------
-    fluid = Fluid(5, 5, 5);
-    float vertices[375];
-    for (int i = 0; i < 125; i++) {
+    fluid = Fluid(200);
+    float vertices[600];
+    for (int i = 0; i < 200; i++) {
         vertices[i * 3] = fluid.particles[i].position.x;
         vertices[i * 3 + 1] = fluid.particles[i].position.y;
         vertices[i * 3 + 2] = fluid.particles[i].position.z;
@@ -97,19 +97,19 @@ int main()
     external_accelerations.emplace_back(0, -9.8, 0);
 
     // set up some collision objects
-    Plane bottom = Plane(Vector3D(0, -0.2, 0), Vector3D(0, 1, 0), 1.0);
+    Plane bottom = Plane(Vector3D(0, -0.2, 0), Vector3D(0, 1, 0), 1);
     objects.push_back(&bottom);
-    Plane back = Plane(Vector3D(0, 0, -1), Vector3D(0, 0, 1), 1.0);
+    Plane back = Plane(Vector3D(0, 0, -1), Vector3D(0, 0, 1), 1);
     objects.push_back(&back);
-    Plane right = Plane(Vector3D(0.6, 0, 0), Vector3D(-1, 0, 0), 1.0);
+    Plane right = Plane(Vector3D(0.6, 0, 0), Vector3D(-1, 0, 0), 0.5);
     objects.push_back(&right);
-    Plane left = Plane(Vector3D(-0.6, 0, 0), Vector3D(1, 0, 0), 1.0);
+    Plane left = Plane(Vector3D(-0.6, 0, 0), Vector3D(1, 0, 0), 0.5);
     objects.push_back(&left);
-    Plane front = Plane(Vector3D(0, 0, 0.1), Vector3D(0, 0, -1), 1.0);
+    Plane front = Plane(Vector3D(0, 0, 0.1), Vector3D(0, 0, -1), 0.5);
     objects.push_back(&front);
 
     // set a cover for testing
-    Plane top = Plane(Vector3D(0, 0.55, 0), Vector3D(0, -1, 0), 1.0);
+    Plane top = Plane(Vector3D(0, 0.55, 0), Vector3D(0, -1, 0), 0.5);
     objects.push_back(&top);
 
     // set up OpenGL and configure OpenGL buffer objects with data
@@ -178,7 +178,7 @@ int main()
             for (int i = 0; i < simulation_steps; i++) {
                 fluid.simulate(frames_per_sec, simulation_steps, &fp, external_accelerations, &objects);
             }  
-            for (int i = 0; i < 125; i++) {
+            for (int i = 0; i < 200; i++) {
                 vertices[i * 3] = fluid.particles[i].position.x;
                 vertices[i * 3 + 1] = fluid.particles[i].position.y;
                 vertices[i * 3 + 2] = fluid.particles[i].position.z;
@@ -192,7 +192,7 @@ int main()
         }
 
         // draw (assuming 125 particles)
-        glDrawArrays(GL_POINTS, 0, 125);
+        glDrawArrays(GL_POINTS, 0, 200);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------

@@ -20,22 +20,35 @@ Fluid::Fluid(int num_x, int num_y, int num_z) {
     buildFluid();
 }
 
+Fluid::Fluid(int num) {
+    this->num_particles = num;
+    buildFluid();
+}
+
 Fluid::~Fluid() {
     particles.clear();
 }
 
 void Fluid::buildFluid() {
     // Test implementation
-    for (int i = 0; i < num_x; i++) {
-        for (int j = 0; j < num_y; j++) {
-            for (int k = 0; k < num_z; k++) {
-                Vector3D pos;
-                pos.x = 0.5 / num_x * i;
-                pos.y = 0.5 / num_y * j;
-                pos.z = - 0.5 / num_z * k;
-                particles.emplace_back(pos);
-            }
-        }
+    //for (int i = 0; i < num_x; i++) {
+    //    for (int j = 0; j < num_y; j++) {
+    //        for (int k = 0; k < num_z; k++) {
+    //            Vector3D pos;
+    //            pos.x = 0.5 / num_x * i;
+    //            pos.y = 0.5 / num_y * j;
+    //            pos.z = - 0.5 / num_z * k;
+    //            particles.emplace_back(pos);
+    //        }
+    //    }
+    //}
+
+    for (int i = 0; i < num_particles; i++) {
+        Vector3D pos;
+        pos.x = (rand() * 1.0/ RAND_MAX) - 0.5;
+        pos.y = (rand() * 0.5/ RAND_MAX);
+        pos.z = - (rand() * 1.0 / RAND_MAX);
+        particles.emplace_back(pos);
     }
 }
 
@@ -59,7 +72,7 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
     //---------------------------
     // Idea: use an outside KDtree library (nanoflann)
     // Placeholder code here
-    vector <vector<Particle*>*> neighbor_lookup;
+    neighbor_lookup.clear(); // should I free each entry first?
     for (int i = 0; i < particles.size(); i++) {
         neighbor_lookup.push_back(new vector<Particle*>());
         for (int j = 0; j < particles.size(); j++) {
@@ -78,6 +91,7 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
         for (int i = 0; i < particles.size(); i++) {
             compute_density_est(&particles[i], neighbor_lookup[i]);
         }
+
         for (int i = 0; i < particles.size(); i++) {
             compute_lambda_i(&particles[i], neighbor_lookup[i]);
         }
@@ -86,12 +100,18 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
             compute_position_update(&particles[i], neighbor_lookup[i]);
         }
 
+        // collisions
+        for (int i = 0; i < particles.size(); i++) {
+            self_collide(i, simulation_steps);
+        }
+
         for (int i = 0; i < collision_objects->size(); i++) {
             for (Particle& p : particles) {
                 (*collision_objects)[i]->collide(p);
             }
         }
 
+        // update position
         for (Particle& p : particles) {
             p.next_position += p.delta_pos;
         }
@@ -110,8 +130,20 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
 
 }
 
-void Fluid::self_collide(Particle &p, double simulation_steps) {
-    // TODO
+void Fluid::self_collide(int i, double simulation_steps) {
+    Vector3D total = Vector3D(0);
+    int cnt = 0;
+    for (Particle* p : *neighbor_lookup[i]) {
+        if (p != &particles[i]) {
+            Vector3D p2i = particles[i].position - p->position;
+            double correction = 2 * particle_radius - p2i.norm();
+            if (correction > 0) {
+                total += p2i.unit() * correction;
+                cnt++;
+            }
+        }
+    }
+    if (cnt > 0) particles[i].delta_pos += total / cnt / simulation_steps;
 }
 
 void Fluid::reset() {
@@ -159,6 +191,8 @@ Vector3D Fluid::grad_W(Vector3D x) {
     // We exploit this symmetry to do some clever tricks to compute the gradient
     // Be careful of signs! u points toward the origin, but when computing the abs value of the
     // gradient, we get some negative signs that we have to negate.
+
+    if (x.norm() == 0) return x;
 
     Vector3D u = -x.unit();
     double z = x.norm() / h;
