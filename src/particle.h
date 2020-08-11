@@ -10,7 +10,7 @@ using namespace CGL;
 struct Particle {
   Particle(Vector3D position)
       : start_position(position), position(position),
-        next_position(position), velocity(0) {}
+        next_position(position), velocity(0), delta_pos(Vector3D(0)) {}
 
   // static values
   Vector3D start_position;

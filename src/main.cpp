@@ -109,7 +109,7 @@ int main()
     objects.push_back(&front);
 
     // set a cover for testing
-    Plane top = Plane(Vector3D(0, 0.6, 0), Vector3D(0, -1, 0), 0.5);
+    Plane top = Plane(Vector3D(0, 0.55, 0), Vector3D(0, -1, 0), 1.0);
     objects.push_back(&top);
 
     // set up OpenGL and configure OpenGL buffer objects with data
@@ -147,8 +147,8 @@ int main()
     // set up camera and perspective
     // -----------------------------
     CGL::Collada::CameraInfo camera_info;
-    camera_info.hFov = 60;
-    camera_info.vFov = 60;
+    camera_info.hFov = 80;
+    camera_info.vFov = 80;
     camera_info.nClip = 0.01;
     camera_info.fClip = 10000;
     CGL::Vector3D target(0., 0., 0.);
