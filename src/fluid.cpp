@@ -130,18 +130,17 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
 
 void Fluid::self_collide(int i, double simulation_steps) {
     Vector3D total = Vector3D(0);
-    int cnt = 0;
     for (Particle* p : *neighbor_lookup[i]) {
         if (p != &particles[i]) {
-            Vector3D p2i = particles[i].position - p->position;
+            Vector3D p2i = particles[i].next_position + particles[i].delta_pos 
+                - p->next_position - p->delta_pos;
             double correction = 2 * particle_radius - p2i.norm();
             if (correction > 0) {
-                total += p2i.unit() * correction;
-                cnt++;
+                total += p2i.unit() * correction * particle_bounce;
             }
         }
     }
-    if (cnt > 0) particles[i].delta_pos += total / cnt / simulation_steps;
+    particles[i].delta_pos += total / simulation_steps;
 }
 
 void Fluid::reset() {

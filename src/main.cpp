@@ -33,7 +33,7 @@ bool is_paused = true;
 int frames_per_sec = 15; // CHANGE LATER - JUST TEMP HERE TO SLOW DOWN THE ANIMATION
 int simulation_steps = 2;
 
-#define NUM_PARTICLES 100
+#define NUM_PARTICLES 1000
 
 // scene variables
 CGL::Camera camera;
@@ -103,9 +103,9 @@ int main()
     objects.push_back(&bottom);
     Plane back = Plane(Vector3D(0, 0, -1), Vector3D(0, 0, 1), 0.3);
     objects.push_back(&back);
-    Plane right = Plane(Vector3D(0.6, 0, 0), Vector3D(-1, 0, 0), 0.3);
+    Plane right = Plane(Vector3D(0.2, 0, 0), Vector3D(-1, 0, 0), 0.3);
     objects.push_back(&right);
-    Plane left = Plane(Vector3D(-0.6, 0, 0), Vector3D(1, 0, 0), 0.3);
+    Plane left = Plane(Vector3D(-0.2, 0, 0), Vector3D(1, 0, 0), 0.3);
     objects.push_back(&left);
     Plane front = Plane(Vector3D(0, 0, 0.1), Vector3D(0, 0, -1), 0.3);
     objects.push_back(&front);
