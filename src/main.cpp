@@ -156,7 +156,7 @@ int main()
     CGL::Vector3D target(0., 0., 0.);
     
     // direction of camera from target (i.e. target -> camera direction)
-    CGL::Vector3D c_dir(0., 0., 1);
+    CGL::Vector3D c_dir(0., 1, 1);
     c_dir = c_dir.unit();
 
     camera.place(target, acos(c_dir.y), atan2(c_dir.x, c_dir.z), 1.0, 0.2, 20.);

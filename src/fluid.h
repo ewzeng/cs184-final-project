@@ -62,6 +62,7 @@ struct Fluid {
   double h = 0.1; // the h param for the smooth kernel W 
   double particle_radius = 0.035; // for particle collision
   double particle_bounce = 0.3; // for particle collision
+  double s_corr_constant = 0.000001; // for s_corr
   int solver_iterations = 1;
   int num_particles;
   int num_x;

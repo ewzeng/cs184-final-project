@@ -284,5 +284,6 @@ void Fluid::compute_position_update(Particle* p_i, vector<Particle*>* neighbors)
 // Compute s_corr, the artifical pressure term
 double Fluid::s_corr(Particle* p_i, Particle* p_j) {
     // TODO
-    return 0.0;
+    double tmp = W(p_i->next_position - p_j->next_position) / W(Vector3D(0.2 * h, 0, 0));
+    return -s_corr_constant * tmp * tmp * tmp * tmp;
 }
