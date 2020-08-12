@@ -118,12 +118,19 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
 
     // Update velocity and apply confinements
     //---------------------------------------
-    for (Particle& p : particles) {
-        p.velocity = (p.next_position - p.position) / delta_t;
+    for (int i = 0; i < particles.size(); i++) {
+        particles[i].velocity = (particles[i].next_position - particles[i].position) / delta_t;
 
         // DO SOMETHING RELATED TO VORTICITY & CONFINEMENT
+        Vector3D vadjust = Vector3D(0);
+        for (int j = 0; j < neighbor_lookup[i]->size(); j++) {
+            vadjust += (particles[i].velocity - (*neighbor_lookup[i])[j]->velocity)
+                * W(particles[i].next_position - (*neighbor_lookup[i])[j]->next_position)
+                * viscosity_constant;
+        }
+        particles[i].velocity += vadjust;
 
-        p.position = p.next_position;
+        particles[i].position = particles[i].next_position;
     }
 
 }

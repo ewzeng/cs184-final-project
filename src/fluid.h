@@ -63,6 +63,7 @@ struct Fluid {
   double particle_radius = 0.035; // for particle collision
   double particle_bounce = 0.3; // for particle collision
   double s_corr_constant = 0.000001; // for s_corr
+  double viscosity_constant = 0.00001; // for viscosity
   int solver_iterations = 1;
   int num_particles;
   int num_x;
