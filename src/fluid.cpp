@@ -30,14 +30,14 @@ Fluid::~Fluid() {
 }
 
 void Fluid::buildFluid() {
-    // Test implementation
+    // USE THIS INSTEAD IF WANT CUBE STARTING POINT
     //for (int i = 0; i < num_x; i++) {
     //    for (int j = 0; j < num_y; j++) {
     //        for (int k = 0; k < num_z; k++) {
     //            Vector3D pos;
-    //            pos.x = 0.5 / num_x * i;
-    //            pos.y = 0.5 / num_y * j;
-    //            pos.z = - 0.5 / num_z * k;
+    //            pos.x = 0.4 / num_x * i - 0.2;
+    //            pos.y = 0.3 / num_y * j;
+    //            pos.z = - 0.18 / num_z * k + 0.09;
     //            particles.emplace_back(pos);
     //        }
     //    }
@@ -45,9 +45,9 @@ void Fluid::buildFluid() {
 
     for (int i = 0; i < num_particles; i++) {
         Vector3D pos;
-        pos.x = (rand() * 0.1/ RAND_MAX) - 0.05;
+        pos.x = (rand() * 0.8/ RAND_MAX) - 0.4;
         pos.y = (rand() * 0.5/ RAND_MAX);
-        pos.z = - (rand() * 1.0 / RAND_MAX);
+        pos.z = - (rand() * 0.18 / RAND_MAX) + 0.09;
         particles.emplace_back(pos);
     }
 }

@@ -88,6 +88,7 @@ int main()
     // later we can support reading in parameters from json files
     // ----------------------------------------------------------
     fluid = Fluid(NUM_PARTICLES);
+    // fluid = Fluid(10, 10, 10); USE THIS with NUM_PARTICLE = 1000 IF WANT A CUBE STARTING POINT
     float vertices[NUM_PARTICLES * 3];
     for (int i = 0; i < NUM_PARTICLES; i++) {
         vertices[i * 3] = fluid.particles[i].position.x;
@@ -101,11 +102,11 @@ int main()
     // set up some collision objects
     Plane bottom = Plane(Vector3D(0, -0.2, 0), Vector3D(0, 1, 0), 0.3);
     objects.push_back(&bottom);
-    Plane back = Plane(Vector3D(0, 0, -1), Vector3D(0, 0, 1), 0.3);
+    Plane back = Plane(Vector3D(0, 0, -0.1), Vector3D(0, 0, 1), 0.3);
     objects.push_back(&back);
-    Plane right = Plane(Vector3D(0.2, 0, 0), Vector3D(-1, 0, 0), 0.3);
+    Plane right = Plane(Vector3D(0.5, 0, 0), Vector3D(-1, 0, 0), 0.3);
     objects.push_back(&right);
-    Plane left = Plane(Vector3D(-0.2, 0, 0), Vector3D(1, 0, 0), 0.3);
+    Plane left = Plane(Vector3D(-0.5, 0, 0), Vector3D(1, 0, 0), 0.3);
     objects.push_back(&left);
     Plane front = Plane(Vector3D(0, 0, 0.1), Vector3D(0, 0, -1), 0.3);
     objects.push_back(&front);
@@ -156,7 +157,7 @@ int main()
     CGL::Vector3D target(0., 0., 0.);
     
     // direction of camera from target (i.e. target -> camera direction)
-    CGL::Vector3D c_dir(0., 1, 1);
+    CGL::Vector3D c_dir(0, 1, 3);
     c_dir = c_dir.unit();
 
     camera.place(target, acos(c_dir.y), atan2(c_dir.x, c_dir.z), 1.0, 0.2, 20.);
