@@ -82,7 +82,7 @@ int main()
     // build and compile our shader program
     // location differs in linux and windows
     // ------------------------------------
-    Shader ourShader("../../../shaders/particle.vert", "../../../shaders/particle.frag"); 
+    Shader ourShader("../shaders/Particle.vert", "../shaders/Particle.frag"); 
 
     // initalize fluid and simulation variables
     // later we can support reading in parameters from json files

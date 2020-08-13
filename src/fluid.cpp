@@ -294,3 +294,50 @@ double Fluid::s_corr(Particle* p_i, Particle* p_j) {
     double tmp = W(p_i->next_position - p_j->next_position) / W(Vector3D(0.2 * h, 0, 0));
     return -s_corr_constant * tmp * tmp * tmp * tmp;
 }
+
+
+float Fluid::kernel(float x, float y, float z) {
+    return 0.0;
+}
+
+void Fluid::march_one_cube(float f_x, float f_y, float f_z, float scale) {
+    float cube_vertex[8];
+    int triangle_lookup = 0;
+    for (int vert = 0; vert < 8; vert++) {
+        // TODO
+        cube_vertex[vert] = kernel(f_x + cube_vertex_offset[vert][0] * scale, 
+                                   f_y + cube_vertex_offset[vert][1] * scale, 
+                                   f_z + cube_vertex_offset[vert][2] * scale);
+
+    }
+
+    for (int vert = 0; vert < 8; vert++) {
+        if (cube_vertex[vert] < isovalue) {
+            triangle_lookup |= 1 << vert;
+        }
+    }
+
+    int list_edge = vertices2edge[triangle_lookup];
+
+    if (list_edge == 0) return;
+
+    for (int e = 0; e < 12; e++) {
+        // add edges
+    }
+
+    for(int tri = 0; tri < 5; tri++) {
+        // draw triangles
+    }
+}
+
+void Fluid::marching_cubes(int levels) {
+    float delta = 1.0 / levels;
+    for (int i = 0; i < levels; i++) {
+        for (int j = 0; j < levels; j++) {
+            for (int k = 0; k < levels; k++) {
+                Fluid::march_one_cube(i * delta, j * delta, k * delta, delta);
+            }
+        }
+    }
+}
+
