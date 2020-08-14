@@ -41,13 +41,13 @@ In doing this project, we hope to answer with our analysis whether or not real-t
 ## Schedule
 Week 1: Read the paper and build the skeleton code for both position based particle simulation and anisotropic kernel surface. Learn how to use blender to render objects. 
 
-Week 2: Try to finish the coding by the beginning of week, start debugging the code if there is any and finish rendering as well as the final report. Can try to implement extra features if there is timing remaining. 
+Week 2: Try to finish the coding by the beginning of week, start debugging the code if there is any and finish rendering as well as the final report. Can try to implement extra features if there is time remaining. 
 
 ## Resources
-[Position Based Fluids](http://mmacklin.com/pbf_sig_preprint.pdf)
-[Reconstructing Surfaces of Particle-Based Fluids
-Using Anisotropic Kernels](https://www.cc.gatech.edu/~turk/my_papers/sph_surfaces.pdf)
-[Marching Cubes Algorithm](http://www.cs.carleton.edu/cs_comps/0405/shape/marching_cubes.html)
-[Blender](https://www.blender.org/features/animation/)
+[Position Based Fluids](http://mmacklin.com/pbf_sig_preprint.pdf)  
+[Reconstructing Surfaces of Particle-Based Fluids  
+Using Anisotropic Kernels  ](https://www.cc.gatech.edu/~turk/my_papers/sph_surfaces.pdf)
+[Marching Cubes Algorithm](http://www.cs.carleton.edu/cs_comps/0405/shape/marching_cubes.html)  
+[Blender](https://www.blender.org/features/animation/)  
 
 We will we using our personal computers to do most of rendering, but we may take advantage of the hive machines if they are available. We will be using Blender to render our meshes.
