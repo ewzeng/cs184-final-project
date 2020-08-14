@@ -62,7 +62,7 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
     //----------------------------------
     for (Particle& p : particles) {
         for (Vector3D& a : external_accelerations) {
-            p.velocity += delta_t * a;
+            p.velocity += delta_t * (a + p.forces / pmass);
         }
         p.next_position = p.position + delta_t * p.velocity;
     }
@@ -120,8 +120,14 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
     //---------------------------------------
     for (int i = 0; i < particles.size(); i++) {
         particles[i].velocity = (particles[i].next_position - particles[i].position) / delta_t;
+    }
 
-        // DO SOMETHING RELATED TO VORTICITY & CONFINEMENT
+    // Vorticity
+    compute_omega();
+    apply_vorticity();
+
+    // Viscosity
+    for (int i = 0; i < particles.size(); i++) {
         Vector3D vadjust = Vector3D(0);
         for (int j = 0; j < neighbor_lookup[i]->size(); j++) {
             vadjust += (particles[i].velocity - (*neighbor_lookup[i])[j]->velocity)
@@ -130,9 +136,9 @@ void Fluid::simulate(double frames_per_sec, double simulation_steps, FluidParame
         }
         particles[i].velocity += vadjust;
 
+        // Update position to final value
         particles[i].position = particles[i].next_position;
     }
-
 }
 
 void Fluid::self_collide(int i, double simulation_steps) {
@@ -293,4 +299,30 @@ double Fluid::s_corr(Particle* p_i, Particle* p_j) {
     // TODO
     double tmp = W(p_i->next_position - p_j->next_position) / W(Vector3D(0.2 * h, 0, 0));
     return -s_corr_constant * tmp * tmp * tmp * tmp;
+}
+
+void Fluid::compute_omega() {
+    for (int i = 0; i < particles.size(); i++) {
+        vector<Particle*>* neighbors = neighbor_lookup[i];
+        particles[i].omega = Vector3D(0);
+        for (Particle* pj : *neighbors) {
+            particles[i].omega += cross(particles[i].velocity - pj->velocity,
+                grad_W(particles[i].next_position - pj->next_position));
+        }
+    }
+}
+
+// Apply voriticity
+// I couldn't understand the math in the paper, so I used the following link to help:
+// https://interactivecomputergraphics.github.io/SPH-Tutorial/slides/06_vorticity.pdf
+void Fluid::apply_vorticity() {
+    for (int i = 0; i < particles.size(); i++) {
+        vector<Particle*>* neighbors = neighbor_lookup[i];
+        Vector3D eta = Vector3D(0);
+        for (Particle* pj : *neighbors) {
+            eta += pj->omega.norm() * grad_W(particles[i].next_position - pj->next_position);
+        }
+        if (eta.norm() == 0) particles[i].forces = Vector3D(0);
+        else particles[i].forces = vorticity_constant * cross(eta.unit(), particles[i].omega);
+    }
 }

@@ -54,6 +54,8 @@ struct Fluid {
   void compute_lambda_i(Particle* p_i, vector<Particle*>* neighbors); // compute lambda_i
   void compute_position_update(Particle* p_i, vector<Particle*>* neighbors); // compute delta_pos
   double s_corr(Particle* p_i, Particle* p_j); // artifical pressure
+  void apply_vorticity(); // apply voriticity
+  void compute_omega(); // for computing voriticity
 
   // Fluid properties
   double rho_0 = 1; // rest density
@@ -64,6 +66,7 @@ struct Fluid {
   double particle_bounce = 0.3; // for particle collision
   double s_corr_constant = 0.0000005; // for s_corr
   double viscosity_constant = 0.00001; // for viscosity
+  double vorticity_constant = 0.0000000025; // for vorticity
   int solver_iterations = 1;
   int num_particles;
   int num_x;

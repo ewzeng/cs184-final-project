@@ -9,5 +9,5 @@ void main()
         discard;
     }
 
-    out_color = (1.0 - m) * vec4(3.0f, 0.5f, 0.2f, 1.0f);
+    out_color = (1.0 - m) * vec4(0.0f, 0.0f, 0.8f, 1.0f);
 }

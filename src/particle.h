@@ -10,7 +10,7 @@ using namespace CGL;
 struct Particle {
   Particle(Vector3D position)
       : start_position(position), position(position),
-        next_position(position), velocity(0), delta_pos(Vector3D(0)) {}
+        next_position(position), velocity(0), delta_pos(Vector3D(0)), forces(Vector3D(0)) {}
 
   // static values
   Vector3D start_position;
@@ -23,6 +23,7 @@ struct Particle {
   double density_est; // density estimate
   double lambda; // needed for the math
   Vector3D delta_pos; // for updating the particle's position 
+  Vector3D omega; // for computing vorticity
 };
 
 #endif /* PARTICLE_H */

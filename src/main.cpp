@@ -33,7 +33,7 @@ bool is_paused = true;
 int frames_per_sec = 15; // CHANGE LATER - JUST TEMP HERE TO SLOW DOWN THE ANIMATION
 int simulation_steps = 2;
 
-#define NUM_PARTICLES 1000
+#define NUM_PARTICLES 5000
 
 // scene variables
 CGL::Camera camera;
@@ -88,7 +88,7 @@ int main()
     // later we can support reading in parameters from json files
     // ----------------------------------------------------------
     fluid = Fluid(NUM_PARTICLES);
-    // fluid = Fluid(10, 10, 10); USE THIS with NUM_PARTICLE = 1000 IF WANT A CUBE STARTING POINT
+    //fluid = Fluid(10, 10, 10); //USE THIS with NUM_PARTICLE = 1000 IF WANT A CUBE STARTING POINT
     float vertices[NUM_PARTICLES * 3];
     for (int i = 0; i < NUM_PARTICLES; i++) {
         vertices[i * 3] = fluid.particles[i].position.x;
