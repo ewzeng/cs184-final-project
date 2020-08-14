@@ -1,6 +1,6 @@
 # CS184 Final Project Design Doc: 3D Fluid Simulation
 
-The finalized project report can be found [here](ewzeng.github.io/cs184-final-project).
+The finalized project report can be found [here](REPORT.md).
 
 ## Team Members
 
