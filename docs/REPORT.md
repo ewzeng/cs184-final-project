@@ -1,104 +1,104 @@
-- # CS184 Final Project Report: 3D Fluid Simulation
+# CS184 Final Project Report: 3D Fluid Simulation
 
-  ## Team Members
+## Team Members
 
-  - Bill Li <chengxil@>
-  - Uma Unni <umaunni@>
-  - Edward Zeng <edwardzeng@>
+- Bill Li <chengxil@>
+- Uma Unni <umaunni@>
+- Edward Zeng <edwardzeng@>
 
-  ## Notes
-  - Our GitHub repo is at https://github.com/ewzeng/cs184-final-project. **Most of our work was done on the `experimental` branch**. (The `master` branch was virtually unused.)
-  - Because GitHub markdown does not support in-line LaTex well, we use backslashes to denote Greek letters. For example, `\alpha` denotes the Greek letter alpha.
+## Notes
+- Our GitHub repo is at https://github.com/ewzeng/cs184-final-project. **Most of our work was done on the `experimental` branch**. (The `master` branch was virtually unused.)
+- Because GitHub markdown does not support in-line LaTex well, we use backslashes to denote Greek letters. For example, `\alpha` denotes the Greek letter alpha.
 
-  ## Abstract
-  Efficient and realistic fluid simulation is of interest to many people, in particular to those working in real-time graphics. In this project, we implemented the paper *Position Based Fluids* by Macklin and Muller to create a fast position-based fluid simulation engine.
+## Abstract
+Efficient and realistic fluid simulation is of interest to many people, in particular to those working in real-time graphics. In this project, we implemented the paper *Position Based Fluids* by Macklin and Muller to create a fast position-based fluid simulation engine.
 
-  ## Technical Approach
+## Technical Approach
 
-  ### Particle Based Fluid Simulation
-  In pseudocode, the simulation algorithm is as follows:
-  ```
-  /* Simulation Loop */
-  WHILE
-      FOR EACH PARTICLE:
-          Apply forces and acceleration
-          Computed (estimated) new position and velocity
-      
-      FOR EACH PARTICLE:
-          Compute and store neighboring particles
-      
-      FOR EACH PARTICLE:
-          Apply incompressibility constraint
-      
-      FOR EACH PARTICLE:
-          Detect and handle collisions
-      
-      FOR EACH PARTICLE:
-          Update particle position
-      
-      FOR EACH PARTICLE:
-          Update particle velocity
-          Apply vorticity heuristics
-          Apply viscosity heuristics
-  END WHILE
-  ```
+### Particle Based Fluid Simulation
+In pseudocode, the simulation algorithm is as follows:
+```
+/* Simulation Loop */
+WHILE
+    FOR EACH PARTICLE:
+        Apply forces and acceleration
+        Computed (estimated) new position and velocity
+    
+    FOR EACH PARTICLE:
+        Compute and store neighboring particles
+    
+    FOR EACH PARTICLE:
+        Apply incompressibility constraint
+    
+    FOR EACH PARTICLE:
+        Detect and handle collisions
+    
+    FOR EACH PARTICLE:
+        Update particle position
+    
+    FOR EACH PARTICLE:
+        Update particle velocity
+        Apply vorticity heuristics
+        Apply viscosity heuristics
+END WHILE
+```
 
-  We decided to store the neighborhood information of the particles (i.e. the topology of the fluid) in a lookup table `vector <vector<Particle *> *> neighbor_lookup` where the neighbors of the `i`-th particle in a fluid would be `*neighbor_lookup[i]`.
+We decided to store the neighborhood information of the particles (i.e. the topology of the fluid) in a lookup table `vector <vector<Particle *> *> neighbor_lookup` where the neighbors of the `i`-th particle in a fluid would be `*neighbor_lookup[i]`.
 
-  To compute neighboring particles of a given particle `p`, we considered many options such as bounding boxes (as in Project 3-1) and hash grids (as in Project 4 and in the paper). We finally decided on using an highly optimized kd-tree provided by the library *nanoflann* because neighborhood computation was a potential bottleneck for the simulation, and we wanted to be as fast as possible.
+To compute neighboring particles of a given particle `p`, we considered many options such as bounding boxes (as in Project 3-1) and hash grids (as in Project 4 and in the paper). We finally decided on using an highly optimized kd-tree provided by the library *nanoflann* because neighborhood computation was a potential bottleneck for the simulation, and we wanted to be as fast as possible.
 
-  In the paper, the incompressibility constraint on the `i`-th particle is expressed as `\rho_i = \rho_0`, where `\rho_0` is the rest density, and `\rho_i` is the estimated density around the `i`-th particle, and given by the weighted average:
+In the paper, the incompressibility constraint on the `i`-th particle is expressed as `\rho_i = \rho_0`, where `\rho_0` is the rest density, and `\rho_i` is the estimated density around the `i`-th particle, and given by the weighted average:
 
-  <img src="https://latex.codecogs.com/svg.latex?\rho_i&space;=&space;\sum_j&space;m_jW(p_i-p_j,&space;h),&space;\&space;m_j&space;\&space;\text{and}&space;\&space;p_j&space;\&space;\text{being&space;mass&space;and&space;position&space;of&space;the&space;j-th&space;neighbor,&space;respectively"><br>
+<img src="https://latex.codecogs.com/svg.latex?\rho_i&space;=&space;\sum_j&space;m_jW(p_i-p_j,&space;h),&space;\&space;m_j&space;\&space;\text{and}&space;\&space;p_j&space;\&space;\text{being&space;mass&space;and&space;position&space;of&space;the&space;j-th&space;neighbor,&space;respectively"><br>
 
-  The paper chose the spikey kernel to be the smoothing kernel `W`. In this project, we decided to choose the cubic spline because it was taught in class, was easier to compute gradients with, and conceptually simple. So:
+The paper chose the spikey kernel to be the smoothing kernel `W`. In this project, we decided to choose the cubic spline because it was taught in class, was easier to compute gradients with, and conceptually simple. So:
 
-  <img src="https://latex.codecogs.com/svg.latex?W(x,h)&space;=&space;\frac{1}{\pi&space;h^3}\begin{cases}1&space;-&space;\frac{3}{2}\xi^2&space;&plus;&space;\frac{3}{4}\xi^3&space;&&space;0&space;\leq&space;\xi&space;\leq&space;1&space;\\&space;\frac{1}{4}(2&space;-&space;\xi)^3&space;&&space;1&space;\leq&space;\xi&space;\leq&space;2\\&space;0&space;&&space;\text{otherwise}\end{cases}"><br>
+<img src="https://latex.codecogs.com/svg.latex?W(x,h)&space;=&space;\frac{1}{\pi&space;h^3}\begin{cases}1&space;-&space;\frac{3}{2}\xi^2&space;&plus;&space;\frac{3}{4}\xi^3&space;&&space;0&space;\leq&space;\xi&space;\leq&space;1&space;\\&space;\frac{1}{4}(2&space;-&space;\xi)^3&space;&&space;1&space;\leq&space;\xi&space;\leq&space;2\\&space;0&space;&&space;\text{otherwise}\end{cases}"><br>
 
-  where `\xi = x.norm()/h` and `h` is the smoothing radius.
+where `\xi = x.norm()/h` and `h` is the smoothing radius.
 
-  Enforcing the incompressibility constraint is as simple as computing a positional update for each particle such that
+Enforcing the incompressibility constraint is as simple as computing a positional update for each particle such that
 
-  <img src="https://latex.codecogs.com/svg.latex?&space;\sum_i&space;C_i=&space;0,&space;\quad&space;C_i&space;=&space;1&space;-&space;\rho_i&space;/&space;\rho_0&space;"><br>
+<img src="https://latex.codecogs.com/svg.latex?&space;\sum_i&space;C_i=&space;0,&space;\quad&space;C_i&space;=&space;1&space;-&space;\rho_i&space;/&space;\rho_0&space;"><br>
 
-  Fortunately, the paper does most of the math to compute this positional update. For the `i`-th particle, the positional update required is 
+Fortunately, the paper does most of the math to compute this positional update. For the `i`-th particle, the positional update required is 
 
-  <img src="https://latex.codecogs.com/svg.latex?&space;\Delta&space;p_i&space;=&space;\frac{1}{\rho_0}&space;\sum_j(\lambda_i&space;&plus;&space;\lambda_j&space;&plus;&space;s_{corr})\nabla&space;W(p_i-p_j,h)"><br>
+<img src="https://latex.codecogs.com/svg.latex?&space;\Delta&space;p_i&space;=&space;\frac{1}{\rho_0}&space;\sum_j(\lambda_i&space;&plus;&space;\lambda_j&space;&plus;&space;s_{corr})\nabla&space;W(p_i-p_j,h)"><br>
 
-  where `p_i`, `p_j` are ths positions of the `i`-th, `j`-th particles, `s_corr` is the artificial pressure term, the summation is taken over the neighboring particles of the `i`-th particle, and `\lambda_i` is given by:
+where `p_i`, `p_j` are ths positions of the `i`-th, `j`-th particles, `s_corr` is the artificial pressure term, the summation is taken over the neighboring particles of the `i`-th particle, and `\lambda_i` is given by:
 
-  <img src="https://latex.codecogs.com/svg.latex?\lambda_i&space;=&space;-&space;\frac{C_i}{\sum_k|\nabla_{p_k}&space;C_i|^2&space;&plus;\varepsilon}"><br>
+<img src="https://latex.codecogs.com/svg.latex?\lambda_i&space;=&space;-&space;\frac{C_i}{\sum_k|\nabla_{p_k}&space;C_i|^2&space;&plus;\varepsilon}"><br>
 
-  The `\epsilon` is here to prevent the denominator being 0.
+The `\epsilon` is here to prevent the denominator being 0.
 
-  Unforunately, the paper was rather vague on implementing self-collisions, so we had to come up with our own method. Our first idea was to do something similar to Project 4:
-  ```
-  FOR EVERY NEIGHBOR q OF p:
-      sum = 0, cnt = 0
-      IF p and q are too close:
-          sum += correction, cnt++
-  p.position += sum/cnt
-  ```
-  However, with this self-collision, the fluid kept collaspsing on top of itself. We suspect this was because the self-collision code did not make any guarantees of the distances between particles as we were taking an average at the end. So we decided to give each particle a radius, and enforced a more drastic self-collision algorithm:
-  ```
-  FOR EVERY NEIGHBOR q OF p:
-      IF p, q intersect:
-          p.position += amount so p and q do not intersect
-  ```
-  This solved the problem of the fluid collaspsing on top of itself, but as a side effect, the particles of the fluid got extremely bouncy, and we couldn't find a good way to mitigate that.
+Unforunately, the paper was rather vague on implementing self-collisions, so we had to come up with our own method. Our first idea was to do something similar to Project 4:
+```
+FOR EVERY NEIGHBOR q OF p:
+    sum = 0, cnt = 0
+    IF p and q are too close:
+        sum += correction, cnt++
+p.position += sum/cnt
+```
+However, with this self-collision, the fluid kept collaspsing on top of itself. We suspect this was because the self-collision code did not make any guarantees of the distances between particles as we were taking an average at the end. So we decided to give each particle a radius, and enforced a more drastic self-collision algorithm:
+```
+FOR EVERY NEIGHBOR q OF p:
+    IF p, q intersect:
+        p.position += amount so p and q do not intersect
+```
+This solved the problem of the fluid collaspsing on top of itself, but as a side effect, the particles of the fluid got extremely bouncy, and we couldn't find a good way to mitigate that.
 
-  The paper also worked out the math for computing `s_corr` (artifical pressure for surface tension), vorticity, and viscosity. We implemented these equations as is, only modifying some constants to give us more realistic simulations with our cubic spline kernel. For completeness, we include the equations:
+The paper also worked out the math for computing `s_corr` (artifical pressure for surface tension), vorticity, and viscosity. We implemented these equations as is, only modifying some constants to give us more realistic simulations with our cubic spline kernel. For completeness, we include the equations:
 
-  <img src="https://latex.codecogs.com/svg.latex?s_{corr}&space;=&space;-k\left(\frac{W(p_i-p_j,h)}{W([0.2h,&space;0,0],&space;h)}\right)^4">
-  <br>
+<img src="https://latex.codecogs.com/svg.latex?s_{corr}&space;=&space;-k\left(\frac{W(p_i-p_j,h)}{W([0.2h,&space;0,0],&space;h)}\right)^4">
+<br>
 
-  <img src="https://latex.codecogs.com/svg.latex?f_i^{voriticity}&space;=&space;\varepsilon&space;\cdot&space;\left(\eta&space;\times&space;\omega_i&space;\right),&space;\&space;\eta&space;=&space;\frac{\nabla&space;\omega_i}{\|\nabla&space;\omega_i\|},&space;\&space;\omega_i&space;=&space;\sum_j(v_j-v_i)&space;\times&space;\nabla_{p_j}W(p_i-p_j,h)">
-  <br>
+<img src="https://latex.codecogs.com/svg.latex?f_i^{voriticity}&space;=&space;\varepsilon&space;\cdot&space;\left(\eta&space;\times&space;\omega_i&space;\right),&space;\&space;\eta&space;=&space;\frac{\nabla&space;\omega_i}{\|\nabla&space;\omega_i\|},&space;\&space;\omega_i&space;=&space;\sum_j(v_j-v_i)&space;\times&space;\nabla_{p_j}W(p_i-p_j,h)">
+<br>
 
-  <img src="https://latex.codecogs.com/svg.latex?v_i^{new}&space;=&space;v_i&space;&plus;&space;c\sum_i(v_i-v_j)&space;\cdot&space;W(p_i-p_j,h)">
-  <br>
+<img src="https://latex.codecogs.com/svg.latex?v_i^{new}&space;=&space;v_i&space;&plus;&space;c\sum_i(v_i-v_j)&space;\cdot&space;W(p_i-p_j,h)">
+<br>
 
-  Here, the second and third equations reflect the impact of applying vorticity and viscosity, respectively. Because our fluid particles were rather bouncy, we opted not to include voritcity (which creates bigger splashes) into the default simulation. (Furthermore, the paper states that vorticity confinement is optional.) Simulation with vorticity confinement implemented can be found in the `fluid-sim` branch of the github repo.
+Here, the second and third equations reflect the impact of applying vorticity and viscosity, respectively. Because our fluid particles were rather bouncy, we opted not to include voritcity (which creates bigger splashes) into the default simulation. (Furthermore, the paper states that vorticity confinement is optional.) Simulation with vorticity confinement implemented can be found in the `fluid-sim` branch of the github repo.
 
 
   ### Mesh Generating Algorithm (Marching Cubes)
