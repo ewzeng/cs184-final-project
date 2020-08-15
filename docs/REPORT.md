@@ -9,6 +9,7 @@
 ## Notes
 - Our GitHub repo is at https://github.com/ewzeng/cs184-final-project. **Most of our work was done on the `experimental` branch**. (The `master` branch was virtually unused.)
 - Because GitHub markdown does not support in-line LaTex well, we use backslashes to denote Greek letters. For example, `\alpha` denotes the Greek letter alpha.
+- Our project video is found [here](https://youtu.be/SvBjHHLOGpg).
 
 ## Abstract
 Efficient and realistic fluid simulation is of interest to many people, in particular to those working in real-time graphics. In this project, we implemented the paper *Position Based Fluids* by Macklin and Muller to create a fast position-based fluid simulation engine.
