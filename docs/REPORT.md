@@ -101,80 +101,80 @@ The paper also worked out the math for computing `s_corr` (artifical pressure fo
 Here, the second and third equations reflect the impact of applying vorticity and viscosity, respectively. Because our fluid particles were rather bouncy, we opted not to include voritcity (which creates bigger splashes) into the default simulation. (Furthermore, the paper states that vorticity confinement is optional.) Simulation with vorticity confinement implemented can be found in the `fluid-sim` branch of the github repo.
 
 
-  ### Mesh Generating Algorithm (Marching Cubes)
+### Mesh Generating Algorithm (Marching Cubes)
 
-  In addition to particle simulation, we aspired to create realistic looking videos by converting the particles into a mesh and rendering the mesh. To do this, we wanted to implement the *Marching Cube Algorithm*. The *Marching Cube Algorithm* requires a kernel function `F`, which takes the coordinate `(x,y,z)` as input and outputs a single value `c`. The pseudocode is as follows
-  ```
-  PARTITION the WORLD SPACE into (n^3) CUBES
-  
-  FOR EACH CUBE C:
-      FOR EACH VERTEX V of C:
-          Compute F(V),if F(V) > ISOVALUE, then COLOR V
-      Lookup the list of triangles need to draw based on coloring scheme
-      Draw the list of triangles needed.
-  ```
-  Based on this paper [here](http://academy.cba.mit.edu/classes/scanning_printing/MarchingCubes.pdf), there are 14 unique cases up to rotation as follows. 
-  <br>
-  ![](https://i.imgur.com/p1iajLb.png)
-  <br>
-  Observe since each vertex can either be colored or not colored, there are `2^8 = 256` total cases. To compute exactly which index we are using, we can use the following pseudocode
-  ```
-  lookup = 0
-  FOR i, vertex IN cube:
-      IF f(vertex) > isovalue:
-          lookup = lookup | 1 << i
-  RETURN lookup
-  ```
-  Out idea was to use this lookup table [here](http://paulbourke.net/geometry/polygonise/), which returns triplets of edge numbers, terminated by trailing `-1` at the end of the list. Then for each edge, we placed the vertices by linearly interpolating `f(v1)` and `f(v2)`. We would then use OpenGL to render the triangles.
+In addition to particle simulation, we aspired to create realistic looking videos by converting the particles into a mesh and rendering the mesh. To do this, we wanted to implement the *Marching Cube Algorithm*. The *Marching Cube Algorithm* requires a kernel function `F`, which takes the coordinate `(x,y,z)` as input and outputs a single value `c`. The pseudocode is as follows
+```
+PARTITION the WORLD SPACE into (n^3) CUBES
 
-  However, when we attempted to implement the *Marching Cubes Algorithm* in this way, we did not have enough time to make it work (see the `linux` branch of the github repo for our attempt). We were a little bummed out about this because we were looking forward to making cool videos to show off.
+FOR EACH CUBE C:
+    FOR EACH VERTEX V of C:
+        Compute F(V),if F(V) > ISOVALUE, then COLOR V
+    Lookup the list of triangles need to draw based on coloring scheme
+    Draw the list of triangles needed.
+```
+Based on this paper [here](http://academy.cba.mit.edu/classes/scanning_printing/MarchingCubes.pdf), there are 14 unique cases up to rotation as follows. 
+<br>
+![](https://i.imgur.com/p1iajLb.png)
+<br>
+Observe since each vertex can either be colored or not colored, there are `2^8 = 256` total cases. To compute exactly which index we are using, we can use the following pseudocode
+```
+lookup = 0
+FOR i, vertex IN cube:
+    IF f(vertex) > isovalue:
+        lookup = lookup | 1 << i
+RETURN lookup
+```
+Out idea was to use this lookup table [here](http://paulbourke.net/geometry/polygonise/), which returns triplets of edge numbers, terminated by trailing `-1` at the end of the list. Then for each edge, we placed the vertices by linearly interpolating `f(v1)` and `f(v2)`. We would then use OpenGL to render the triangles.
 
-  Out of curiosity, we exported one of our frames as a point cloud file and then used MeshLab's *Marching Cube Algorithm* to generate the following mesh. If we had more time, we would have generated something similar with our own code and used Blender to apply water textures and shaders to render a video.
-  <br>
-  ![](https://i.imgur.com/6f02At6.png)
+However, when we attempted to implement the *Marching Cubes Algorithm* in this way, we did not have enough time to make it work (see the `linux` branch of the github repo for our attempt). We were a little bummed out about this because we were looking forward to making cool videos to show off.
+
+Out of curiosity, we exported one of our frames as a point cloud file and then used MeshLab's *Marching Cube Algorithm* to generate the following mesh. If we had more time, we would have generated something similar with our own code and used Blender to apply water textures and shaders to render a video.
+<br>
+![](https://i.imgur.com/6f02At6.png)
 
 
-  ### Other Challenges
-  When we started the project, we decided to heavily borrow from the code for Project 4. However, it was difficult to make significant changes from the code as it had a lot dependencies, and the linker was not very cooperative. So after a few days, we decided to scrap a good amount of the code for Project 4 and write our own interactive renderer. This took a while because we had to first learn how to use OpenGL.
+### Other Challenges
+When we started the project, we decided to heavily borrow from the code for Project 4. However, it was difficult to make significant changes from the code as it had a lot dependencies, and the linker was not very cooperative. So after a few days, we decided to scrap a good amount of the code for Project 4 and write our own interactive renderer. This took a while because we had to first learn how to use OpenGL.
 
-  Also, because we were developing on different operating systems, there were various frustrating instances where our code would compile for one OS but fail to compile with others. It was rather difficult to solve these problems.
+Also, because we were developing on different operating systems, there were various frustrating instances where our code would compile for one OS but fail to compile with others. It was rather difficult to solve these problems.
 
-  A third challenge was that fluid simulation requires a lot of given parameters, so it was hard to determine a optimal set of constants to create the most realistic simulation. We ended up tweaking a lot of parameters every time we implemented a new constraint, just to keep things looking as realistic as possible.
+A third challenge was that fluid simulation requires a lot of given parameters, so it was hard to determine a optimal set of constants to create the most realistic simulation. We ended up tweaking a lot of parameters every time we implemented a new constraint, just to keep things looking as realistic as possible.
 
-  ### Lessions Learned
-  This was an interesting project! We learned that it's not easy to implement projects that sound conceptually straightforward (update particle positions, apply constraints, how hard can it be?). In particular, we got a better understanding of how position-based simulation and fluid simulation work. Furthermore, we learned how to use OpenGL (the source code for Project 4 makes so much more sense now). We also learned how to write adaptor classes to use libraries like *nanoflann*. This final project was a great experience for all of us!
+### Lessions Learned
+This was an interesting project! We learned that it's not easy to implement projects that sound conceptually straightforward (update particle positions, apply constraints, how hard can it be?). In particular, we got a better understanding of how position-based simulation and fluid simulation work. Furthermore, we learned how to use OpenGL (the source code for Project 4 makes so much more sense now). We also learned how to write adaptor classes to use libraries like *nanoflann*. This final project was a great experience for all of us!
 
-  ## Results
-  This is our result of simulating a fluid with 1000 particles falling from rest. (Because of our implementation of self collision, the fluid looks rather bouncy.)
+## Results
+This is our result of simulating a fluid with 1000 particles falling from rest. (Because of our implementation of self collision, the fluid looks rather bouncy.)
 
-  ![](https://i.imgur.com/k3Ffwmu.gif =640x360)
+![](https://i.imgur.com/k3Ffwmu.gif =640x360)
 
-  ![](https://i.imgur.com/F3CghOx.gif =640x360)
+![](https://i.imgur.com/F3CghOx.gif =640x360)
 
-  Videos of more detailed simulations with 5000 particles can be found [here](https://www.youtube.com/watch?v=fGKn2YpF01U) and [here](https://www.youtube.com/watch?v=87KfAjHhaZE).
+Videos of more detailed simulations with 5000 particles can be found [here](https://www.youtube.com/watch?v=fGKn2YpF01U) and [here](https://www.youtube.com/watch?v=87KfAjHhaZE).
 
-  *Side Note: These videos were generated by exporting our simulation data to MeshLab's renderer because it has nicer colors than our renderer.*
+*Side Note: These videos were generated by exporting our simulation data to MeshLab's renderer because it has nicer colors than our renderer.*
 
-  Another interesting result we stumpled upon was that it was almost possible to render 1000 fluid particles in real time (on our laptops)! It was a bit too laggy, but one can imagine with a more powerful desktop, position-based fluid simulation in real time would definitely be possible.
+Another interesting result we stumpled upon was that it was almost possible to render 1000 fluid particles in real time (on our laptops)! It was a bit too laggy, but one can imagine with a more powerful desktop, position-based fluid simulation in real time would definitely be possible.
 
-  *Side Note 2: To use our own (real-time) renderer, simply build and run `./clothsim` on the `experimental` branch in github (you may need to change the shader path depending on whether you are on Windows or Linux). Note our renderer is interactive! Press `p` to pause and `r` to restart the simulation!*
+*Side Note 2: To use our own (real-time) renderer, simply build and run `./clothsim` on the `experimental` branch in github (you may need to change the shader path depending on whether you are on Windows or Linux). Note our renderer is interactive! Press `p` to pause and `r` to restart the simulation!*
 
-  ## References and Resources
-  [Position Based Fluids](http://mmacklin.com/pbf_sig_preprint.pdf)  
-  [Marching Cubes](http://academy.cba.mit.edu/classes/scanning_printing/MarchingCubes.pdf)  
-  [nanoflann](https://github.com/jlblancoc/nanoflann)  
-  [Surface Reconstruction](https://www.cc.gatech.edu/~turk/my_papers/sph_surfaces.pdf)  
-  [Triangulation Table](http://paulbourke.net/geometry/polygonise/)  
-  [Meshlab](https://www.meshlab.net/)  
-  [Learn OpenGL](https://learnopengl.com/) (Super useful when we were building our own renderer)  
+## References and Resources
+[Position Based Fluids](http://mmacklin.com/pbf_sig_preprint.pdf)  
+[Marching Cubes](http://academy.cba.mit.edu/classes/scanning_printing/MarchingCubes.pdf)  
+[nanoflann](https://github.com/jlblancoc/nanoflann)  
+[Surface Reconstruction](https://www.cc.gatech.edu/~turk/my_papers/sph_surfaces.pdf)  
+[Triangulation Table](http://paulbourke.net/geometry/polygonise/)  
+[Meshlab](https://www.meshlab.net/)  
+[Learn OpenGL](https://learnopengl.com/) (Super useful when we were building our own renderer)  
 
-  ## Contributions
-  Edward Zeng
-  - Built the OpenGL renderer, incorporated the nanoflann library, created the basic structure of the skeleton code, implemented the fluid simulation math and collisions, debugged the fluid simulation math, helped write the final report and make the project video
+## Contributions
+Edward Zeng
+- Built the OpenGL renderer, incorporated the nanoflann library, created the basic structure of the skeleton code, implemented the fluid simulation math and collisions, debugged the fluid simulation math, helped write the final report and make the project video
 
-  Bill Li
-  - Helped Edward bash out the math behind fluid simulation, spent a lot of time rendering videos and tweaking parameters, researched and worked on implementing the marching cubes algorithm, helped write the final report and make the project video 
+Bill Li
+- Helped Edward bash out the math behind fluid simulation, spent a lot of time rendering videos and tweaking parameters, researched and worked on implementing the marching cubes algorithm, helped write the final report and make the project video 
 
-  Uma Unni
+Uma Unni
 
-  - Worked on marching cubes algorithm, and helped debug, debug, debug
+- Worked on marching cubes algorithm, and helped debug, debug, debug
