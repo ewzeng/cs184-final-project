@@ -126,7 +126,7 @@ FOR i, vertex IN cube:
         lookup = lookup | 1 << i
 RETURN lookup
 ```
-Out idea was to use this lookup table [here](http://paulbourke.net/geometry/polygonise/), which returns triplets of edge numbers, terminated by trailing `-1` at the end of the list. Then for each edge, we placed the vertices by linearly interpolating `f(v1)` and `f(v2)`. We would then use OpenGL to render the triangles.
+Our idea was to use this lookup table [here](http://paulbourke.net/geometry/polygonise/), which returns triplets of edge numbers, terminated by trailing `-1` at the end of the list. Then for each edge, we placed the vertices by linearly interpolating `f(v1)` and `f(v2)`. We would then use OpenGL to render the triangles.
 
 However, when we attempted to implement the *Marching Cubes Algorithm* in this way, we did not have enough time to make it work (see the `linux` branch of the github repo for our attempt). We were a little bummed out about this because we were looking forward to making cool videos to show off.
 
