@@ -136,7 +136,7 @@ Out of curiosity, we exported one of our frames as a point cloud file and then u
 
 
 ### Other Challenges
-When we started the project, we decided to heavily borrow from the code for Project 4. However, it was difficult to make significant changes from the code as it had a lot dependencies, and the linker was not very cooperative. So after a few days, we decided to scrap a good amount of the code for Project 4 and write our own interactive renderer. This took a while because we had to first learn how to use OpenGL.
+When we started the project, we decided to heavily borrow from the code for Project 4. However, it was difficult to make significant changes from the code as it had a lot dependencies, and the linker was not very cooperative. So after a few days, we decided to scrap a good amount of the code from Project 4 and write our own interactive renderer. This took a while because we had to first learn how to use OpenGL.
 
 Also, because we were developing on different operating systems, there were various frustrating instances where our code would compile for one OS but fail to compile with others. It was rather difficult to solve these problems.
 
